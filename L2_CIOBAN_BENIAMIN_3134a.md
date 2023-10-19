@@ -23,7 +23,7 @@ L2 Cioban Beniamin 3134a
 ### 8. Ce reprezintă parametrii metodei `CreatePerspectiveFieldOfView()` și care este domeniul de valori pentru aceștia?
   Parametrii metodei `CreatePerspectiveFieldOfView()` sunt:
   
-  `public static void **CreatePerspectiveFieldOfView** (float fovy, float aspect, float zNear, float zFar);`
+  `public static void CreatePerspectiveFieldOfView (float fovy, float aspect, float zNear, float zFar);`
   - *fovy* (field of view): 
   - *aspect*: 
   - *zNear*: 
