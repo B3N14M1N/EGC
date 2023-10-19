@@ -2,7 +2,7 @@
 L2 Cioban Beniamin 3134a
 
 ## 1.
-  Modificând valoarea constantei "MatrixMode.Projection"
+  
 ## 2.
 
 ## 3.
