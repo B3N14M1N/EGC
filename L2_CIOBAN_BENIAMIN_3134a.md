@@ -12,7 +12,9 @@
 ### 3. Când este rulată metoda OnUpdateFrame()?
   Metoda OnUpdateFrame() este apelată în fiecare cadru al ciclului aplicației după OnLoad() și înainte de OnRenderFrame().
 ### 4. Ce este modul imediat de randare?
+  Modul imediat de randare este un concept în grafică computerizată în care fiecare instrucțiune de desenare este executată imediat, fără a stoca obiectele grafice în memorie.
 ### 5. Care este ultima versiune de OpenGL care acceptă modul imediat?
+  Modul imediat de randare este suportat până la versiunea OpenGL 3.5.
 ### 6. Când este rulată metoda OnRenderFrame()?
 ### 7. De ce este nevoie ca metoda OnResize() să fie executată cel puțin o dată?
 ### 8. Ce reprezintă parametrii metodei CreatePerspectiveFieldOfView() și care este domeniul de valori pentru aceștia?
