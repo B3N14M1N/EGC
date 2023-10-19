@@ -24,7 +24,7 @@ L2 Cioban Beniamin 3134a
   Parametrii metodei `CreatePerspectiveFieldOfView()` sunt:
   
   `public static void CreatePerspectiveFieldOfView (float fovy, float aspect, float zNear, float zFar);`
-  - *fovy* (field of view): 
-  - *aspect*: 
-  - *zNear*: 
-  - *zFar*:
+  - *fovy* (field of view): domeniul (0, Math.PI]. Reprezintă unghiul câmpului vizual în direcția y (în radiani);
+  - *aspect*: domeniul >0. Reprezintă raportul de aspect al vederii (lățime / înălțime);
+  - *zNear*: domeniul >0. Reprezintă distanța la planul apropiat;
+  - *zFar*: domeniul (0,*zNear*). Reprezintă distanța la planul îndepărtat;
