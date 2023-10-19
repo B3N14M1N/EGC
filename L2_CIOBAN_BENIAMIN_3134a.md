@@ -6,7 +6,7 @@
 
 ## 3.
 ### 1. Ce este un viewport?
-  Un viewport este o regiune specifică a unei ferestre de desen în care se va desena conținutul grafic.
+  Un viewport este o regiune specifică a unei ferestre de desen în care se va afișa conținutul grafic.
 ### 2. Ce reprezintă conceptul de frames per seconds din punctul de vedere al bibliotecii OpenGL?
 ### 3. Când este rulată metoda OnUpdateFrame()?
 ### 4. Ce este modul imediat de randare?
