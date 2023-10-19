@@ -8,9 +8,9 @@ L2 Cioban Beniamin 3134a
 ## 3.
 ### 1. Ce este un viewport?
   Un **viewport** este o regiune specifică a unei ferestre de desen în care se va afișa conținutul grafic.
-### 2. Ce reprezintă conceptul de frames per seconds din punctul de vedere al bibliotecii OpenGL?
+### 2. Ce reprezintă conceptul de frames per seconds din punctul de vedere al bibliotecii *OpenGL*?
   În contextul bibliotecii *OpenGL*, conceptul de **"frames per second" (FPS)** se referă la măsurarea ratei de afișare a cadrelor randate pe ecran.
-### 3. Când este rulată metoda **OnUpdateFrame()**?
+### 3. Când este rulată metoda `OnUpdateFrame()`?
   Metoda `OnUpdateFrame()` este apelată în fiecare cadru al ciclului aplicației după `OnLoad()` și înainte de `OnRenderFrame()`.
 ### 4. Ce este modul imediat de randare?
   Modul imediat de randare este un concept în grafică computerizată în care fiecare instrucțiune de desenare este executată imediat, fără a stoca obiectele grafice în memorie.
