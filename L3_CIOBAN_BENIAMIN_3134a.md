@@ -17,11 +17,11 @@
 ### • Care este efectul utilizării directivei *TriangleStrip* atunci când desenate segmente de dreaptă multiple în *OpenGL*?
   Efectul utilizării directivei *TriangleStrip* este că fiecare punct specificat după primul punct este utilizat pentru a forma un nou triunghi împreună cu cele două puncte anterioare, astfel încât triunghiurile se conectează între ele pentru a forma o bandă de triunghiuri.
 ## 5. Creați un proiect elementar. Urmăriți exemplul furnizat cu titlu de demonstrație - OpenGL_conn_ImmediateMode. Atenție la setarea viewport-ului.
-  `-`
+  `-------------------`
 ## 6. Urmăriți aplicația „shapes.exe” din tutorii OpenGL Nate Robbins. De ce este importantă utilizarea de culori diferite (în gradient sau culori selectate per suprafață) în desenarea obiectelor 3D? Care este avantajul?
 ## 7.Ce reprezintă un gradient de culoare? Cum se obține acesta în OpenGL?
   Un gradient de culoare este o tranziție treptată între două sau mai multe culori diferite. În OpenGL, se pot obține un gradient de culoare utilizând mai multe metode, un mod ar fi prin intermediul șaderelor (shaderele OpenGL).
 ## 8. Creați o aplicație care la apăsarea unui set de taste va modifica culoarea unui triunghi (coordonatele acestuia vor fi încărcate dintr-un fișier text) între valorile minime și maxime, pentru fiecare canal de culoare. Ce efect va apare la utilizarea canalului de transparență? Aplicația va permite modificarea unghiului camerei cu ajutorul mouse-ului. Folosiți documentația disponibila la https://opentk.net/api/OpenTK.Input.Mouse.html
 ## 9. Modificați aplicația pentru a manipula valorile RGB pentru fiecare vertex ce definește un triunghi. Afișați valorile RGB în consolă.
-  `-`
+  `-------------------`
 ## 10. Ce efect are utilizarea unei culori diferite pentru fiecare vertex atunci când desenați o linie sau un triunghi în modul strip?
