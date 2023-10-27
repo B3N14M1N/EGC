@@ -13,7 +13,7 @@ using OpenTK.Platform;
  */
 namespace CIOBAN
 {
-    class SimpleWindow : GameWindow
+    class Program : GameWindow
     {
         //Laboratorul 2
         #region L2
@@ -27,7 +27,7 @@ namespace CIOBAN
         private bool renderTriangleOnce = false;
         private bool renderTriangle = true;
         #endregion
-        public SimpleWindow() : base(800, 600)
+        public Program() : base(800, 600)
         {
             KeyDown += WindowSettings;
         }
@@ -143,7 +143,7 @@ namespace CIOBAN
         [STAThread]
         static void Main(string[] args)
         {
-            using (SimpleWindow example = new SimpleWindow())
+            using (Program example = new Program())
             {
                 example.Run(30.0, 0.0);
             }
