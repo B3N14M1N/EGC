@@ -8,9 +8,9 @@
   Comanda `GL.LineWidth(float)` din *OpenGL* setează grosimea liniilor desenate. Această comandă nu operează în interiorul unei secțiuni `GL.Begin()`. Efectul său este vizibil în întreaga aplicație *OpenGL* după apelarea acestei comenzi, până când este schimbată din nou cu o altă valoare de grosime a liniei.
   Comanda `GL.PointSize(float)` setează dimensiunea punctelor desenate în *OpenGL*. Aceasta determină diametrul punctelor în unități de coordonate de ecran. La fel ca `GL.LineWidth(float)`, această comandă se aplică global pentru toate punctele desenate în toată aplicația *OpenGL* și rămâne valabilă până când este modificată. Acest lucru nu operează în interiorul unei secțiuni `GL.Begin()`.
 ## 4. Răspundeți la următoarele întrebări (utilizați ca referință eventual și tutorii OpenGL Nate Robbins):
-### • Care este efectul utilizării directivei *LineLoop atunci* când desenate segmente de dreaptă multiple în *OpenGL*?
-### • Care este efectul utilizării directivei *LineStrip atunci* când desenate segmente de dreaptă multiple în *OpenGL*?
-### • Care este efectul utilizării directivei *TriangleFan atunci* când desenate segmente de dreaptă multiple în *OpenGL*?
+### • Care este efectul utilizării directivei *LineLoop* atunci când desenate segmente de dreaptă multiple în *OpenGL*?
+### • Care este efectul utilizării directivei *LineStrip* atunci când desenate segmente de dreaptă multiple în *OpenGL*?
+### • Care este efectul utilizării directivei *TriangleFan* atunci când desenate segmente de dreaptă multiple în *OpenGL*?
 ### • Care este efectul utilizării directivei *TriangleStrip* atunci când desenate segmente de dreaptă multiple în *OpenGL*?
 ## 5. Creați un proiect elementar. Urmăriți exemplul furnizat cu titlu de demonstrație - OpenGL_conn_ImmediateMode. Atenție la setarea viewport-ului.
 ## 6. Urmăriți aplicația „shapes.exe” din tutorii OpenGL Nate Robbins. De ce este importantă utilizarea de culori diferite (în gradient sau culori selectate per suprafață) în desenarea obiectelor 3D? Care este avantajul?
