@@ -1,6 +1,6 @@
 # Răspunsuri laboratorul 3-4
 ## 1. Care este ordinea de desenare a vertexurilor pentru aceste metode (orar sau anti-orar)? Desenați axele de coordonate din aplicația-template folosind un singur apel `GL.Begin()`.
-    Ordinea de desenare a vertexurilor este in sens orar.
+  Ordinea de desenare a vertexurilor este in sens orar.
 ## 2. Ce este *anti-aliasing*? Prezentați această tehnică pe scurt.
   *Anti-aliasing* este o tehnică utilizată în grafică computerizată pentru a reduce sau elimina efectul de "*aliasing*", care este apariția pixelată a liniilor sau marginilor obiectelor pe ecran. Acest efect apare atunci când rezoluția ecranului nu este suficient de mare pentru a reda liniile și marginile obiectelor în mod clar, sau atunci când obiectele sunt poziționate într-un mod care creează contrast brusc între ele și fundal (înclinate oblic). 
   Anti-aliasing funcționează prin adăugarea de eșantionare suplimentară sau "mostre" între pixeli pentru a calcula culoarea intermediară. Aceste mostre sunt apoi combinate pentru a crea o imagine finală cu margini mai netede și mai naturale.
