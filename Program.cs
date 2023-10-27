@@ -9,15 +9,18 @@ using OpenTK.Platform;
  * 3134A
  * REZOLVARI
  * * L2
- * 
+ * * L3
+ * * L4
  */
 namespace CIOBAN
 {
     class Program : GameWindow
     {
+        #region Parametrii
         //Laboratorul 2
         #region L2
         private KeyboardState lastFrameKeyboard;
+
         private Key moveTriangleKey = Key.Q;
         private bool moveTriangle = true;
         private Key renderTriangleKey = Key.E;
@@ -26,15 +29,12 @@ namespace CIOBAN
         Vector3 poz = new Vector3();
         // zPoz folosit pentru scalarea tiunghiului folosind rotita
         private float zPoz = 0;
-
         private float mouseSensitivity = 0.1f;
 
         #endregion
         #region L3-4
-        /// <summary>
-        /// Folosesc clasa creata "Camera"
-        /// pentru a putea controla view-ul
-        /// </summary>
+        // Folosesc clasa creata "Camera"
+        // pentru a putea controla view-ul scenei
         public Camera camera;
         // rotX si rotY sunt folosite pentru a calcula rotatia camerei
         // folosind datele de la mouse .X si .Y
@@ -55,8 +55,6 @@ namespace CIOBAN
         // "lockCamera" blocheaza controlul camerei
         // daca este setat pe True
         private bool lockCamera = false;
-
-
         // Un set de key pentru schimbarea 
         // colorilor triunghiului randat
         private readonly Key change1Key = Key.Z;
@@ -65,9 +63,9 @@ namespace CIOBAN
         private Color color2 = Color.White;
         private readonly Key change3Key = Key.C;
         private Color color3 = Color.White;
-
         #endregion
-
+        #endregion
+        #region Constructor
         public Program() : base(800, 600)
         {
             KeyDown += WindowSettings;
@@ -76,6 +74,8 @@ namespace CIOBAN
             camera = new Camera(new Vector3(5,5,-5));
         }
         // Functie in care prelucreaza inputul pentru modificarea ferestrei
+        #endregion
+        #region Evenimete
         void WindowSettings(object sender, KeyboardKeyEventArgs e)
         {
             if (e.Key == Key.Escape)
@@ -84,46 +84,14 @@ namespace CIOBAN
             if (e.Key == Key.F11)
                 this.WindowState = (this.WindowState == WindowState.Fullscreen)? WindowState.Normal : WindowState.Fullscreen;
         }
-
-        protected override void OnLoad(EventArgs e)
-        {
-            base.OnLoad(e);
-            GL.ClearColor(Color.Black);
-
-            // L2 preia valoarea curenta a rotitei mouse-ului
-            zPoz = Mouse.GetState().WheelPrecise;
-        }
-        protected override void OnResize(EventArgs e)
-        {
-            base.OnLoad(e);
-            /* L2
-             * Vizualizare 2d (X,Y)
-            GL.Viewport(0, 0, Width, Height);
-            GL.MatrixMode(MatrixMode.Modelview);
-            GL.LoadIdentity();
-            GL.Ortho(-2.0, 2.0, -2.0, 2.0, 0.0, 4.0);
-            */
-
-            GL.Viewport(0, 0, Width, Height);
-
-            double aspect_ratio = Width / (double)Height;
-            // L3-4 Seteaza perspectiva si camera
-            camera.ChangePerspectiveFieldOfView((float)aspect_ratio);
-            camera.UpdateCamera();
-        }
-        
+        #endregion
+        #region Metode
         // L3
         // Functie pentru generarea unei culor aleatorie
         public Color GetRandomColor()
         {
             Random rnd = new Random();
             return Color.FromArgb(rnd.Next(0, 256), rnd.Next(0, 256), rnd.Next(0, 256), rnd.Next(0, 256));
-        }
-        protected override void OnUpdateFrame(FrameEventArgs e)
-        {
-            base.OnUpdateFrame(e);
-            GetInput((float)e.Time);
-
         }
 
         // L2
@@ -197,6 +165,92 @@ namespace CIOBAN
             lastFrameKeyboard = keyboard;
         }
 
+        // L2
+        // Functie in care se deseneaza un triunghi 
+        // la pozitiile specificate X si Y,
+        // Z determina scalarea triunghiului
+        public void DrawTriangle(float x, float y, float z)
+        {
+            GL.Begin(PrimitiveType.Triangles);
+            GL.Color3(color1);
+            GL.Vertex3(x - z, y + z, 0);
+            GL.Color3(color2);
+            GL.Vertex3(x, y - z, 0);
+            GL.Color3(color3);
+            GL.Vertex3(x + z, y + z, 0);
+            GL.End();
+        }
+
+        // L3
+        // Afiseaza axele de coordonate 
+        public void DrawAxes()
+        {
+            GL.LineWidth(5);
+            GL.Begin(PrimitiveType.Lines);
+            GL.Color3(Color.Red);
+            GL.Vertex3(0, 0, 0);
+            GL.Vertex3(2, 0, 0);
+            GL.Color3(Color.Green);
+            GL.Vertex3(0, 0, 0);
+            GL.Vertex3(0, 2, 0);
+            GL.Color3(Color.Blue);
+            GL.Vertex3(0, 0, 0);
+            GL.Vertex3(0, 0, 2);
+            GL.End();
+            GL.LineWidth(0.1f);
+        }
+        
+        // L3
+        // Randeaza un grid cu o anumita
+        // culoare si un nr de linii
+        public void DrawGrid(Color gridColor, int halfSize)
+        {
+            GL.Begin(PrimitiveType.Lines);
+            GL.Color3(gridColor);
+            for (int i = -halfSize; i <= halfSize; i++)
+            {
+                GL.Vertex3(i, 0, -halfSize);
+                GL.Vertex3(i, 0, halfSize);
+
+                GL.Vertex3(-halfSize, 0, -i);
+                GL.Vertex3(halfSize, 0, -i);
+            }
+            GL.End();
+        }
+        #endregion
+        #region Metode de baza
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+            GL.ClearColor(Color.Black);
+
+            // L2 preia valoarea curenta a rotitei mouse-ului
+            zPoz = Mouse.GetState().WheelPrecise;
+        }
+        protected override void OnResize(EventArgs e)
+        {
+            base.OnLoad(e);
+            /* L2
+             * Vizualizare 2d (X,Y)
+            GL.Viewport(0, 0, Width, Height);
+            GL.MatrixMode(MatrixMode.Modelview);
+            GL.LoadIdentity();
+            GL.Ortho(-2.0, 2.0, -2.0, 2.0, 0.0, 4.0);
+            */
+
+            GL.Viewport(0, 0, Width, Height);
+
+            double aspect_ratio = Width / (double)Height;
+            // L3-4 Seteaza perspectiva si camera
+            camera.ChangePerspectiveFieldOfView((float)aspect_ratio);
+            camera.UpdateCamera();
+        }
+        protected override void OnUpdateFrame(FrameEventArgs e)
+        {
+            base.OnUpdateFrame(e);
+            GetInput((float)e.Time);
+
+        }
         protected override void OnRenderFrame(FrameEventArgs e)
         {
             base.OnRenderFrame(e);
@@ -219,57 +273,8 @@ namespace CIOBAN
 
             this.SwapBuffers();
         }
+        #endregion
 
-        // L2
-        // Functie in care se deseneaza un triunghi 
-        // la pozitiile specificate.
-        // Z determina scalarea triunghiului
-        public void DrawTriangle(float x, float y, float z)
-        {
-            GL.Begin(PrimitiveType.Triangles);
-            GL.Color3(color1);
-            GL.Vertex3(x - z, y + z, 0);
-            GL.Color3(color2);
-            GL.Vertex3(x, y - z, 0);
-            GL.Color3(color3);
-            GL.Vertex3(x + z, y + z, 0);
-            GL.End();
-        }
-        // L3
-        // Afiseaza axele de coordonate 
-        public void DrawAxes()
-        {
-            GL.LineWidth(5);
-            GL.Begin(PrimitiveType.Lines);
-            GL.Color3(Color.Red);
-            GL.Vertex3(0, 0, 0);
-            GL.Vertex3(2, 0, 0);
-            GL.Color3(Color.Green);
-            GL.Vertex3(0, 0, 0);
-            GL.Vertex3(0, 2, 0);
-            GL.Color3(Color.Blue);
-            GL.Vertex3(0, 0, 0);
-            GL.Vertex3(0, 0, 2);
-            GL.End();
-            GL.LineWidth(0.1f);
-        }
-        // L3
-        // Randeaza un grid cu o anumita
-        // culoare si un nr de linii
-        public void DrawGrid(Color gridColor,int halfSize)
-        {
-            GL.Begin(PrimitiveType.Lines);
-            GL.Color3(gridColor);
-            for (int i = -halfSize; i <= halfSize; i++)
-            {
-                GL.Vertex3(i, 0, -halfSize);
-                GL.Vertex3(i, 0, halfSize);
-
-                GL.Vertex3(-halfSize, 0, -i);
-                GL.Vertex3(halfSize, 0, -i);
-            }
-            GL.End();
-        }
         [STAThread]
         static void Main(string[] args)
         {
