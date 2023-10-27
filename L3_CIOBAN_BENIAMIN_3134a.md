@@ -9,6 +9,7 @@
   Comanda `GL.PointSize(float)` setează dimensiunea punctelor desenate în *OpenGL*. Aceasta determină diametrul punctelor în unități de coordonate de ecran. La fel ca `GL.LineWidth(float)`, această comandă se aplică global pentru toate punctele desenate în toată aplicația *OpenGL* și rămâne valabilă până când este modificată. Acest lucru nu operează în interiorul unei secțiuni `GL.Begin()`.
 ## 4. Răspundeți la următoarele întrebări (utilizați ca referință eventual și tutorii OpenGL Nate Robbins):
 ### • Care este efectul utilizării directivei *LineLoop* atunci când desenate segmente de dreaptă multiple în *OpenGL*?
+  Efectul utilizării *GL.LineLoop*, este conectarea tuturor segmentelor de dreaptă în ordine pentru a forma un contur închis, adică ultimul punct se va conecta la primul punct pentru a închide bucla.
 ### • Care este efectul utilizării directivei *LineStrip* atunci când desenate segmente de dreaptă multiple în *OpenGL*?
 ### • Care este efectul utilizării directivei *TriangleFan* atunci când desenate segmente de dreaptă multiple în *OpenGL*?
 ### • Care este efectul utilizării directivei *TriangleStrip* atunci când desenate segmente de dreaptă multiple în *OpenGL*?
