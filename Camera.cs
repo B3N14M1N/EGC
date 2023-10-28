@@ -71,17 +71,18 @@ namespace CIOBAN
         // Functie care primeste parametru o directie locala
         // o prelucreaza pentru rotatia curenta si adauga
         // la pozitia curenta
-        // !!!!! Viteza de miscare depinde de parametrul primit !!!!!
+        // !!!!! Viteza de miscare depinde de parametrul primit (Momentan)!!!!!
         public void MoveCamera(Vector3 Direction)
         {
+            Vector3 offset = Direction.X * Right;
 
-            Vector3 offset = Vector3.Zero;
-
-            offset += Direction.X * Right;
             offset += Direction.Y * Forward;
             offset.Y += Direction.Z;
 
-            offset.NormalizeFast();
+            // Daca inmultesc vectorul normalizat
+            // cu o variabila pot crea sensivitatea
+            // miscarii dorite
+            //offset.NormalizeFast();
 
             position += offset;
         }

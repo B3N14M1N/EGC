@@ -71,7 +71,7 @@ namespace CIOBAN
             KeyDown += WindowSettings;
             // L3 
             // Initializeaza camera si o pozitie aleatorie
-            camera = new Camera(new Vector3(5,5,-5));
+            camera = new Camera(new Vector3(1,1,5));
         }
         // Functie in care prelucreaza inputul pentru modificarea ferestrei
         #endregion
@@ -258,11 +258,11 @@ namespace CIOBAN
             GL.Clear(ClearBufferMask.ColorBufferBit);
             // L3
             // Modifica pozitia camerei
-            // Randeaza axele de coordonate
             // Randeaza un grid
+            // Randeaza axele de coordonate
             camera.UpdateCamera();
-            DrawAxes();
             DrawGrid(Color.White,16);
+            DrawAxes();
             // L2
             // Randeaza triunghiul doar daca 
             // renderTriangle = true
