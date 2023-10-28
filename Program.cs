@@ -80,6 +80,10 @@ namespace CIOBAN
             administrare = new Administrare_Date(ConfigurationManager.AppSettings["NumeFisier"]);
             administrare.PrintToConsole(administrare.GetCoords().ToString());
             poz = administrare.GetCoords();
+
+            // Ascunde cursorul si il limiteaza doar in window
+            CursorGrabbed = true;
+            CursorVisible = false;
         }
         // Functie in care prelucreaza inputul pentru modificarea ferestrei
         #endregion
@@ -90,7 +94,12 @@ namespace CIOBAN
                 this.Exit();
 
             if (e.Key == Key.F11)
-                this.WindowState = (this.WindowState == WindowState.Fullscreen)? WindowState.Normal : WindowState.Fullscreen;
+                this.WindowState = (this.WindowState == WindowState.Fullscreen) ? WindowState.Normal : WindowState.Fullscreen;
+            if (e.Key == Key.F1)
+            {
+                CursorGrabbed = !CursorGrabbed;
+                CursorVisible = !CursorVisible;
+            }
         }
         #endregion
         #region Metode
