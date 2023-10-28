@@ -158,15 +158,19 @@ namespace CIOBAN
             // Prelucreaza inputul pentru a misca camera
             if(!lockCamera)
             {
-                // cameraPosition este pozitia camerei
-                // Reprezinta un vector3 (este vizualizat ca un vector local
-                // adica z+ fata, z- spate,
+                // cameraPosition este directia in care trebuie mers
+                // Reprezinta un vector3 (este vizualizat ca un vector local)
+                // z+ fata, z- spate,
                 // y+ sus, y- jos,
-                // x- stanga, x+ dreapta)
-                Vector3 cameraPosition = camera.position;
-                cameraPosition.X = (keyboard.IsKeyDown(cameraLeftKey) ? (-1f) : keyboard.IsKeyDown(cameraRightKey) ? (1f) : 0) * deltaTime * movementSpeed;
-                cameraPosition.Z = (keyboard.IsKeyDown(cameraDownKey) ? (-1f) : keyboard.IsKeyDown(cameraUpKey) ? (1f) : 0) * deltaTime * movementSpeed;
-                cameraPosition.Y = (keyboard.IsKeyDown(cameraBackwardsKey) ? (-1f) : keyboard.IsKeyDown(cameraForwardKey) ? (1f) : 0) * deltaTime * movementSpeed;
+                // x- stanga, x+ dreapta
+                Vector3 cameraPosition = Vector3.Zero;
+                cameraPosition.X -= keyboard.IsKeyDown(cameraLeftKey) ? 1f : 0f;
+                cameraPosition.X += keyboard.IsKeyDown(cameraRightKey) ? 1f : 0f;
+                cameraPosition.Z -= keyboard.IsKeyDown(cameraDownKey) ? 1f : 0f;
+                cameraPosition.Z += keyboard.IsKeyDown(cameraUpKey) ? 1f : 0f;
+                cameraPosition.Y -= keyboard.IsKeyDown(cameraBackwardsKey) ? 1f : 0f;
+                cameraPosition.Y += keyboard.IsKeyDown(cameraForwardKey) ? 1f : 0f;
+                cameraPosition *= deltaTime * movementSpeed;
 
                 // Apeleaza metodele de miscare a pozitiei si a rotatiei
                 // prelucreaza vectorul local pentru a aplica directiei sensului camerei
