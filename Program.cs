@@ -4,14 +4,16 @@ using OpenTK;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
 using OpenTK.Platform;
+using CIOBAN.Librarie;
+using System.Configuration;
 /*
- * CIOBAN BENIAMIN
- * 3134A
- * REZOLVARI
- * * L2
- * * L3
- * * L4
- */
+* CIOBAN BENIAMIN
+* 3134A
+* REZOLVARI
+* * L2
+* * L3
+* * L4
+*/
 namespace CIOBAN
 {
     class Program : GameWindow
@@ -63,6 +65,8 @@ namespace CIOBAN
         private Color color2 = Color.White;
         private readonly Key change3Key = Key.C;
         private Color color3 = Color.White;
+
+        Administrare_Date administrare;
         #endregion
         #endregion
         #region Constructor
@@ -72,6 +76,10 @@ namespace CIOBAN
             // L3 
             // Initializeaza camera si o pozitie aleatorie
             camera = new Camera(new Vector3(1,1,5));
+            // Initializeaza obiectul pentru citire date din fisier
+            administrare = new Administrare_Date(ConfigurationManager.AppSettings["NumeFisier"]);
+            administrare.PrintToConsole(administrare.GetCoords().ToString());
+            poz = administrare.GetCoords();
         }
         // Functie in care prelucreaza inputul pentru modificarea ferestrei
         #endregion

@@ -12,7 +12,7 @@ using OpenTK.Platform;
  * * L3
  * * L4
  */
-namespace CIOBAN
+namespace CIOBAN.Librarie
 {
     public class Camera
     {
