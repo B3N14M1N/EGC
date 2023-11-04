@@ -1,4 +1,4 @@
-# Răspunsuri laboratorul 3-4
+# Răspunsuri laboratorul 3
 ## 1. Care este ordinea de desenare a vertexurilor pentru aceste metode (orar sau anti-orar)? Desenați axele de coordonate din aplicația-template folosind un singur apel `GL.Begin()`.
   Ordinea de desenare a vertexurilor este in sens orar.
   
