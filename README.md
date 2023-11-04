@@ -13,6 +13,6 @@
   
   `Mouse` roteste camera
 #### Control pentru exercitii
-  `Z, X, C` - schimba culorile triunghiului randat
+  `Z, X, C, V` - schimba culorile triunghiului randat
 
   `Q, E` - Randeaza sau modifica triunghiul randat
