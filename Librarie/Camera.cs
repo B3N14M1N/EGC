@@ -7,10 +7,6 @@ using OpenTK.Platform;
 /*
  * CIOBAN BENIAMIN
  * 3134A
- * REZOLVARI
- * * L2
- * * L3
- * * L4
  */
 namespace CIOBAN.Librarie
 {

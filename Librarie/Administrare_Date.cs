@@ -8,10 +8,6 @@ using System.Threading.Tasks;
 /*
  * CIOBAN BENIAMIN
  * 3134A
- * REZOLVARI
- * * L2
- * * L3
- * * L4
  */
 namespace CIOBAN.Librarie
 {
@@ -48,9 +44,6 @@ namespace CIOBAN.Librarie
                 }
             }
             return Vector3.Zero;
-        }
-        public void PrintToConsole(string sir) {
-            Console.WriteLine(sir);
         }
     }
 }

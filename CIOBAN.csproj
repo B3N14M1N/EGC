@@ -66,6 +66,8 @@
   <ItemGroup>
     <Compile Include="Librarie\Administrare_Date.cs" />
     <Compile Include="Librarie\Camera.cs" />
+    <Compile Include="Librarie\Cub.cs" />
+    <Compile Include="Librarie\Triunghi.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>
