@@ -6,10 +6,14 @@ using OpenTK.Input;
 using OpenTK.Platform;
 using CIOBAN.Librarie;
 using System.Configuration;
+using OpenTK.Graphics;
+using CIOBAN.Librarie.RandomThings;
+using CIOBAN.Librarie.Basic;
+using CIOBAN.Scripturi;
 /*
- * CIOBAN BENIAMIN
- * 3134A
- */
+* CIOBAN BENIAMIN
+* 3134A
+*/
 namespace CIOBAN
 {
     // L2,3,4(in progres),
@@ -33,30 +37,11 @@ namespace CIOBAN
         #endregion
         // Laboratorul 3
         #region L3
+        CameraController cameraController = new CameraController();
         // Un triunghi 
         Triunghi triunghi = new Triunghi();
-        // Folosesc clasa creata "Camera"
-        // pentru a putea controla view-ul scenei
-        public Camera camera = new Camera(new Vector3(1, 1, 5));
-        // rotX si rotY sunt folosite pentru a calcula rotatia camerei
-        // folosind datele de la mouse .X si .Y
         private float rotX = 0;
         private float rotY = 0;
-        // "movementSpeed" si "mouseSensitivity" (din L2)
-        // determina sensivitatea controlului camerei
-        private float movementSpeed = 2f;
-        // Un set de key pentru determinarea inputului
-        // care va misca camera
-        private readonly Key cameraForwardKey = Key.W;
-        private readonly Key cameraBackwardsKey = Key.S;
-        private readonly Key cameraLeftKey = Key.A;
-        private readonly Key cameraRightKey = Key.D;
-        private readonly Key cameraUpKey = Key.LShift;
-        private readonly Key cameraDownKey = Key.LControl;
-        private readonly Key lockCameraKey = Key.Number1;
-        // "lockCamera" blocheaza controlul camerei
-        // daca este setat pe True
-        private bool lockCamera = false;
         // Un set de key pentru schimbarea 
         // colorilor triunghiului randat
         private readonly Key UniColor = Key.V;
@@ -72,11 +57,12 @@ namespace CIOBAN
         // Laboratorul 4 ---- in progres
         #region L4
         // L4
-        Cub cub = new Cub(new Vector3(-.25f,.25f,-.25f),0.5f);
+        //Cub cub = new Cub(new Vector3(-.25f,.25f,-.25f),0.5f);
+        FallingCube cub = new FallingCube(RandomThings.GetRandomVector3(new Vector3(-1,1,-1), new Vector3(1,5,1)),0.5f);
         #endregion
         #endregion
         #region Constructor
-        public Program() : base(800, 600)
+        public Program() : base(800, 600,new GraphicsMode(32, 24, 0, 8))
         {
             KeyDown += WindowSettings;
 
@@ -91,9 +77,8 @@ namespace CIOBAN
 
             Console.Clear();
             Console.WriteLine("Student: Cioban Beniamin\nGrupa: 3134a\n\n" +
-                "Controale:\n" +
-                "\tWindow - F11, Cursor - F1\n"+
-                "\tCamera - WASD + LShift + LControl, num1 - blocare miscare camera\n" +
+                "Window Controls:\n\tWindow - F11, Cursor - F1\n");
+            Console.Write(cameraController.ToString() +
                 "\tTriunghi randat - Mouse (miscare axe X,Y), Rotita (scalarea)\n" +
                 "\t\t Q (blocare miscare), E (Randare).\n" +
                 "\tSchimbari culori - Z (vertex1), X (vertex2), C (vertex3).\n");
@@ -116,18 +101,11 @@ namespace CIOBAN
         }
         #endregion
         #region Metode
-        // L3
-        // Functie pentru generarea unei culor aleatorie
-        public Color GetRandomColor()
-        {
-            Random rnd = new Random();
-            return Color.FromArgb(rnd.Next(0, 256), rnd.Next(0, 256), rnd.Next(0, 256), rnd.Next(0, 256));
-        }
-
+      
         // L2,3
         // Functie petnru preluarea si prelucrarea  
         // inputului mouse-ului si a tastaturii.
-        public void GetInput(float deltaTime)
+        public void GetInput()
         {
             KeyboardState keyboard = Keyboard.GetState();
             MouseState mouse = Mouse.GetState();
@@ -140,15 +118,15 @@ namespace CIOBAN
             // Misca triunghiul dupa inputul mouse-ului
             if (moveTriangle)
             {
-                poz.X -= (rotX - mouse.X) * deltaTime * mouseSensitivity;
-                poz.Y -= (mouse.Y - rotY) * deltaTime * mouseSensitivity;
+                poz.X -= (rotX - mouse.X) * (float)Time.deltaTime * mouseSensitivity;
+                poz.Y -= (mouse.Y - rotY) * (float)Time.deltaTime * mouseSensitivity;
 
                 if (zPoz - mouse.WheelPrecise > 0)
                 {
-                    poz.Z -= deltaTime;
+                    poz.Z -= (float)Time.deltaTime;
                 }
                 else if (zPoz - mouse.WheelPrecise < 0)
-                    poz.Z += deltaTime;
+                    poz.Z += (float)Time.deltaTime;
                 if (poz.Z == 0)
                     poz.Z = .1f;
                 zPoz = mouse.WheelPrecise;
@@ -163,18 +141,18 @@ namespace CIOBAN
             bool schimbat = false;
             if (keyboard.IsKeyDown(change1Key) && lastFrameKeyboard.IsKeyUp(change1Key))
             { 
-                color1 = GetRandomColor();
+                color1 = RandomThings.GetRandomColor();
                 schimbat = true;
             }
             if (keyboard.IsKeyDown(change2Key) && lastFrameKeyboard.IsKeyUp(change2Key))
             { 
-                color2 = GetRandomColor();
+                color2 = RandomThings.GetRandomColor();
                 if(!triunghi.uniColor)
                     schimbat = true;
             }
             if (keyboard.IsKeyDown(change3Key) && lastFrameKeyboard.IsKeyUp(change3Key))
             {
-                color3 = GetRandomColor();
+                color3 = RandomThings.GetRandomColor();
                 if (!triunghi.uniColor)
                     schimbat = true;
             }
@@ -188,34 +166,6 @@ namespace CIOBAN
                 triunghi.ver2Color = color2;
                 triunghi.ver3Color = color3;
                 Console.WriteLine(triunghi.ToString());
-            }
-            // L3
-            // Blocheaza sau nu controlul camerei
-            lockCamera = (keyboard.IsKeyDown(lockCameraKey) && lastFrameKeyboard.IsKeyUp(lockCameraKey)) ? !lockCamera : lockCamera;
-
-            // L3
-            // Prelucreaza inputul pentru a misca camera
-            if(!lockCamera)
-            {
-                // cameraPosition este directia in care trebuie mers
-                // Reprezinta un vector3 (este vizualizat ca un vector local)
-                // z+ fata, z- spate,
-                // y+ sus, y- jos,
-                // x- stanga, x+ dreapta
-                Vector3 cameraPosition = Vector3.Zero;
-                cameraPosition.X -= keyboard.IsKeyDown(cameraLeftKey) ? 1f : 0f;
-                cameraPosition.X += keyboard.IsKeyDown(cameraRightKey) ? 1f : 0f;
-                cameraPosition.Z -= keyboard.IsKeyDown(cameraDownKey) ? 1f : 0f;
-                cameraPosition.Z += keyboard.IsKeyDown(cameraUpKey) ? 1f : 0f;
-                cameraPosition.Y -= keyboard.IsKeyDown(cameraBackwardsKey) ? 1f : 0f;
-                cameraPosition.Y += keyboard.IsKeyDown(cameraForwardKey) ? 1f : 0f;
-                cameraPosition *= deltaTime * movementSpeed;
-
-                // Apeleaza metodele de miscare a pozitiei si a rotatiei
-                // prelucreaza vectorul local pentru a aplica directiei sensului camerei
-                camera.MoveCamera(cameraPosition);
-                // calculeaza discrepanta dintre miscarea mouse-ului in functie de timpul parcurs in frame
-                camera.AddRotation((rotX - mouse.X) * deltaTime * mouseSensitivity, -(mouse.Y - rotY) * deltaTime * mouseSensitivity);
             }
             // L3
             // Updateaza rotatiile precedente cu a mouse-ului
@@ -245,7 +195,7 @@ namespace CIOBAN
         // Afiseaza axele de coordonate 
         public void DrawAxes()
         {
-            GL.LineWidth(5);
+            GL.LineWidth(6);
             GL.Begin(PrimitiveType.Lines);
             GL.Color3(Color.Red);
             GL.Vertex3(0, 0, 0);
@@ -283,9 +233,14 @@ namespace CIOBAN
         {
             base.OnLoad(e);
             GL.ClearColor(Color.Black);
+            GL.Enable(EnableCap.DepthTest);
+            GL.Hint(HintTarget.PolygonSmoothHint, HintMode.Nicest);
 
             // L2 preia valoarea curenta a rotitei mouse-ului
             zPoz = Mouse.GetState().WheelPrecise;
+            //L4 Apeleaza metodele de start
+            cub.colorChangeKey = change1Key;
+            cub.Start();
         }
         protected override void OnResize(EventArgs e)
         {
@@ -302,24 +257,27 @@ namespace CIOBAN
 
             double aspect_ratio = Width / (double)Height;
             // L3-4 Seteaza perspectiva si camera
-            camera.ChangePerspectiveFieldOfView((float)aspect_ratio);
-            camera.UpdateCamera();
+            cameraController.camera.ChangePerspectiveFieldOfView((float)aspect_ratio);
+            cameraController.Draw();
         }
         protected override void OnUpdateFrame(FrameEventArgs e)
         {
             base.OnUpdateFrame(e);
-            GetInput((float)e.Time);
+            Time.deltaTime = e.Time;
+            GetInput();
+            cub.Update();
+            cameraController.Update();
         }
         protected override void OnRenderFrame(FrameEventArgs e)
         {
             base.OnRenderFrame(e);
 
-            GL.Clear(ClearBufferMask.ColorBufferBit);
+            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
             // L3
-            // Modifica pozitia camerei
+            // Updateaza view-ul camerei
             // Randeaza un grid
             // Randeaza axele de coordonate
-            camera.UpdateCamera();
+            cameraController.Draw();
             DrawGrid(Color.White,16);
             DrawAxes();
             // L2
@@ -331,7 +289,7 @@ namespace CIOBAN
             }
             cub.Draw();
             triunghi.Draw();
-            this.SwapBuffers();
+            SwapBuffers();
         }
         #endregion
 
