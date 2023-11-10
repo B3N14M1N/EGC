@@ -10,6 +10,7 @@ using OpenTK.Graphics;
 using CIOBAN.Librarie.RandomThings;
 using CIOBAN.Librarie.Basic;
 using CIOBAN.Scripturi;
+using System.Collections.Generic;
 /*
 * CIOBAN BENIAMIN
 * 3134A
@@ -31,7 +32,7 @@ namespace CIOBAN
         private Key renderTriangleKey = Key.E;
         private bool renderTriangle = true;
 
-        Vector3 poz = new Vector3();
+        Vector3 poz = new Vector3(0f,0f,-.5f);
         // zPoz folosit pentru scalarea tiunghiului folosind rotita
         private float zPoz = 0;
         private float mouseSensitivity = 0.1f;
@@ -45,7 +46,7 @@ namespace CIOBAN
         // Laboratorul 4 ---- in progres
         #region L4 - L5
         // L4
-        FallingObject fallingObject = new FallingObject(RandomThings.GetRandomVector3(new Vector3(-1,1,-1), new Vector3(1,5,1)));
+        FallingObject fallingObject = new FallingObject();
         #endregion
         #endregion
         #region Constructor
@@ -58,17 +59,7 @@ namespace CIOBAN
             CursorGrabbed = true;
             CursorVisible = false;
 
-            Console.Clear();
-            Console.WriteLine("Student: Cioban Beniamin\nGrupa: 3134a\n\n" +
-                "Console Clear + Show Controls: F2\n"+
-                "Window Controls:\n\tWindow - F11, Cursor - F1\n");
-            Console.Write(cameraController.ToString() +
-                fallingObject.ToString() +
-                triangle.ToString() +
-                "\nControl Triunghi randat pe XY:" +
-                "\n\tMiscare axe X,Y - Mouse,\n\tScalare - Rotita," +
-                "\n\tBlocare miscare - " + moveTriangleKey +
-                ",\n\tRandare - " + renderTriangleKey + ".\n");
+            DisplayControls(new List<GameObject>() { cameraController, fallingObject, triangle });
         }
         // Functie in care prelucreaza inputul pentru modificarea ferestrei
         #endregion
@@ -87,20 +78,30 @@ namespace CIOBAN
             }
             if(e.Key == Key.F2)
             {
-                Console.Clear();
-                Console.WriteLine("Student: Cioban Beniamin\nGrupa: 3134a\n\n" +
-                    "Console Clear + Show Controls: F2\n" +
-                    "Window Controls:\n\tWindow - F11, Cursor - F1\n");
-                Console.Write(cameraController.ToString() +
-                    fallingObject.ToString() +
-                    triangle.ToString() +
-                    "\tTriunghi randat - Mouse (miscare axe X,Y), Rotita (scalarea)\n" +
-                    "\t\t Q (blocare miscare), E (Randare).\n");
+                DisplayControls(new List<GameObject>() {cameraController,fallingObject,triangle});
             }
         }
         #endregion
         #region Metode
       
+        // Metoda pentru afisarea controalerol
+        private void DisplayControls(List<GameObject> list)
+        {
+            Console.Clear();
+            Console.WriteLine("Student: Cioban Beniamin\nGrupa: 3134a\n\n" +
+                "Console Clear + Show Controls: F2\n" +
+                "Window Controls:\n\tWindow - F11, Cursor - F1\n");
+            foreach (GameObject obj in list)
+            {
+                Console.Write(obj.ToString());
+            }
+            Console.Write(
+                "\nControl Triunghi randat pe XY:" +
+                "\n\tMiscare axe X,Y - Mouse,\n\tScalare - Rotita," +
+                "\n\tBlocare miscare - " + moveTriangleKey +
+                ",\n\tRandare - " + renderTriangleKey + ".\n");
+        }
+        
         // L2,3
         // Functie petnru preluarea si prelucrarea  
         // inputului mouse-ului si a tastaturii.
@@ -145,7 +146,7 @@ namespace CIOBAN
         public void DrawTriangle(float x, float y, float z)
         {
             GL.Begin(PrimitiveType.Triangles);
-            GL.Color3(Color.Purple);
+            GL.Color3(Color.AntiqueWhite);
             GL.Vertex3(x - z, y + z, 0);
             GL.Vertex3(x, y - z, 0);
             GL.Vertex3(x + z, y + z, 0);
@@ -253,7 +254,7 @@ namespace CIOBAN
         {
             using (Program example = new Program())
             {
-                example.Run(30.0, 0.0);
+                example.Run(60.0, 0.0);
             }
         }
     }

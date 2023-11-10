@@ -28,9 +28,9 @@ namespace CIOBAN.Librarie
         #region Constructori
         public Triunghi() {
             isVisible = true;
-            ver1Color = RandomThings.RandomThings.GetRandomColor(10);
-            ver2Color = RandomThings.RandomThings.GetRandomColor(100);
-            ver3Color = RandomThings.RandomThings.GetRandomColor(1000);
+            ver1Color = RandomThings.RandomGenerator.GetRandomColor(10);
+            ver2Color = RandomThings.RandomGenerator.GetRandomColor(100);
+            ver3Color = RandomThings.RandomGenerator.GetRandomColor(1000);
         }
         public Triunghi( Color color)
         {

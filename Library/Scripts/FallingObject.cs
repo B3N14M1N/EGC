@@ -33,6 +33,7 @@ namespace CIOBAN.Scripturi
         private float initialY;
         private float fallingSpeed = 1f;
         private float size = 1f;
+        private const float GRAVITY = -9.8f;
         // Parametrii publici
         public float FallingSpeed { 
             get { return fallingSpeed; }
@@ -76,7 +77,7 @@ namespace CIOBAN.Scripturi
             {
                 // Genereaza culori aleatorii pentru Top si Bottom
                 Random seed = new Random();
-                cub.SetColors(new List<Color>() { RandomThings.GetRandomColor(seed.Next()), RandomThings.GetRandomColor(seed.Next()) });
+                cub.SetColors(new List<Color>() { RandomGenerator.GetRandomColor(seed.Next()), RandomGenerator.GetRandomColor(seed.Next()) });
                 Console.WriteLine(cub.ToString());
             }
             // Daca nu cade si daca e apasat butonul stanga mouse
@@ -84,13 +85,17 @@ namespace CIOBAN.Scripturi
             if (!isFalling && mouse.IsButtonDown(MouseButton.Left))
             {
                 cub = new Cub(size);
+                fallingSpeed = -1f;
                 isFalling = true;
             }
             if(isFalling && !onGround)
             {
-                Transform.Position -= new Vector3(0f, FallingSpeed * (float)Time.deltaTime, 0f);
+                
+                Transform.Position += new Vector3(0f, FallingSpeed * (float)Time.deltaTime, 0f);
+                fallingSpeed += GRAVITY * (float)Time.deltaTime;
                 if (Transform.Position.Y <= size / 2)
-                { 
+                {
+                    Transform.Position = new Vector3(Transform.Position.X, size/2, Transform.Position.Z);
                     isFalling = false;
                     onGround = true;
                 }

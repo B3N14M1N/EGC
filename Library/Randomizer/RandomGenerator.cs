@@ -9,7 +9,7 @@ using System.Configuration;
 using OpenTK.Graphics;
 namespace CIOBAN.Librarie.RandomThings
 {
-    public static class RandomThings
+    public static class RandomGenerator
     {
         // L3
         // Functie pentru generarea unei culor aleatorie

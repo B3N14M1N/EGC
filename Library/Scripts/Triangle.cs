@@ -54,7 +54,7 @@ namespace CIOBAN.Scripturi
             bool schimbat = false;
             if (keyboard.IsKeyDown(change1Key) && lastFrameKeyboard.IsKeyUp(change1Key))
             {
-                color1 = RandomThings.GetRandomColor();
+                color1 = RandomGenerator.GetRandomColor();
                 if (uniColor)
                 {
                     color2 = color3 = color1;
@@ -63,12 +63,12 @@ namespace CIOBAN.Scripturi
             }
             if (!uniColor && keyboard.IsKeyDown(change2Key) && lastFrameKeyboard.IsKeyUp(change2Key))
             {
-                color2 = RandomThings.GetRandomColor();
+                color2 = RandomGenerator.GetRandomColor();
                 schimbat = true;
             }
             if (!uniColor && keyboard.IsKeyDown(change3Key) && lastFrameKeyboard.IsKeyUp(change3Key))
             {
-                color3 = RandomThings.GetRandomColor();
+                color3 = RandomGenerator.GetRandomColor();
                 schimbat = true;
             }
             // L3
