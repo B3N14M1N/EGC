@@ -13,6 +13,5 @@
   
   `Mouse` roteste camera
 #### Control pentru exercitii
-  `Z, X, C, V` - schimba culorile triunghiului randat
-
-  `Q, E` - Randeaza sau modifica triunghiul randat
+   Afișate în consolă.
+  `F2` - Curăță consola și afișează informații despre controale.
