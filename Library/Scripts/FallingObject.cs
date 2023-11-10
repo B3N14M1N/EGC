@@ -26,22 +26,16 @@ namespace CIOBAN.Scripturi
     public class FallingObject : GameObject
     {
         #region Parametri
-        #region Falling
+        #region Logic
         private KeyboardState lastKeyboardState;
         private bool isFalling = false;
         private bool onGround = false;
-        private float initialY;
-        private float fallingSpeed = 1f;
+        private float initialY; // Pozitia initiala (din fisier)
+        private float fallingSpeed = 1f; // m/s
         private float size = 1f;
-        private const float GRAVITY = -9.8f;
-        // Parametrii publici
-        public float FallingSpeed { 
-            get { return fallingSpeed; }
-            set { fallingSpeed=value>0?value:1f;}
-        }
-        public Key colorChangeKey = Key.B;
+        private const float GRAVITY = 9.8f; // m/s^2
+        private Key colorChangeKey = Key.B;
         #endregion
-
         #region Model 3d
         // Un model 3d
         IRenderer cub;
@@ -85,13 +79,12 @@ namespace CIOBAN.Scripturi
             if (!isFalling && mouse.IsButtonDown(MouseButton.Left))
             {
                 cub = new Cub(size);
-                fallingSpeed = -1f;
+                fallingSpeed = 1f;
                 isFalling = true;
             }
             if(isFalling && !onGround)
             {
-                
-                Transform.Position += new Vector3(0f, FallingSpeed * (float)Time.deltaTime, 0f);
+                Transform.Position -= new Vector3(0f, fallingSpeed * (float)Time.deltaTime, 0f);
                 fallingSpeed += GRAVITY * (float)Time.deltaTime;
                 if (Transform.Position.Y <= size / 2)
                 {
