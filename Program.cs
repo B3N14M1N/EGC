@@ -22,7 +22,7 @@ namespace CIOBAN
     {
         #region Parametrii
 
-        IRenderer skyBlock = new Cub(500);
+        private IRenderer skyBlock = new Cub(500);
 
         // Laboratorul 2
         #region L2

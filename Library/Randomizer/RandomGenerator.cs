@@ -7,6 +7,10 @@ using OpenTK.Platform;
 using CIOBAN.Librarie;
 using System.Configuration;
 using OpenTK.Graphics;
+/*
+ * CIOBAN BENIAMIN
+ * 3134A
+ */
 namespace CIOBAN.Librarie.Randomizer
 {
     public static class RandomGenerator
