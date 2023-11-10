@@ -1,5 +1,5 @@
 # EGC
-## Laboratorul 2,3-4
+## Laboratorul 2, 3, 4, -5 
 
 ### Taste
 #### Window, Cursor
