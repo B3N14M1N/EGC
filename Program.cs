@@ -45,7 +45,6 @@ namespace CIOBAN
         // Laboratorul 4 ---- in progres
         #region L4
         // L4
-        //Cub fallingObject = new Cub(new Vector3(-.25f,.25f,-.25f),0.5f);
         FallingObject fallingObject = new FallingObject(RandomThings.GetRandomVector3(new Vector3(-1,1,-1), new Vector3(1,5,1)),0.5f);
         #endregion
         #endregion
@@ -205,13 +204,6 @@ namespace CIOBAN
         protected override void OnResize(EventArgs e)
         {
             base.OnLoad(e);
-            /* L2
-             * Vizualizare 2d (X,Y)
-            GL.Viewport(0, 0, Width, Height);
-            GL.MatrixMode(MatrixMode.Modelview);
-            GL.LoadIdentity();
-            GL.Ortho(-2.0, 2.0, -2.0, 2.0, 0.0, 4.0);
-            */
 
             GL.Viewport(0, 0, Width, Height);
 

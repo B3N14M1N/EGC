@@ -64,20 +64,20 @@
     <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Librarie\Administrare_Date.cs" />
-    <Compile Include="Librarie\Basic\IBehaviour.cs" />
-    <Compile Include="Librarie\Basic\GameObject.cs" />
-    <Compile Include="Librarie\Basic\Time.cs" />
-    <Compile Include="Librarie\Basic\Transform.cs" />
-    <Compile Include="Librarie\Camera.cs" />
-    <Compile Include="Librarie\Modele3D\Cub.cs" />
-    <Compile Include="Librarie\RandomThings\RandomThings.cs" />
-    <Compile Include="Librarie\Basic\IRenderer.cs" />
-    <Compile Include="Librarie\Modele3D\Triunghi.cs" />
+    <Compile Include="Library\Administrare_Date.cs" />
+    <Compile Include="Library\Basic\IBehaviour.cs" />
+    <Compile Include="Library\Basic\GameObject.cs" />
+    <Compile Include="Library\Basic\Time.cs" />
+    <Compile Include="Library\Basic\Transform.cs" />
+    <Compile Include="Library\Camera.cs" />
+    <Compile Include="Library\Models\Cub.cs" />
+    <Compile Include="Library\RandomThings\RandomThings.cs" />
+    <Compile Include="Library\Basic\IRenderer.cs" />
+    <Compile Include="Library\Models\Triunghi.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Scripturi\CameraController.cs" />
-    <Compile Include="Scripturi\FallingObject.cs" />
-    <Compile Include="Scripturi\Triangle.cs" />
+    <Compile Include="Library\Scripts\CameraController.cs" />
+    <Compile Include="Library\Scripts\FallingObject.cs" />
+    <Compile Include="Library\Scripts\Triangle.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8.1">
