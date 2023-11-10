@@ -1,6 +1,7 @@
 ﻿using CIOBAN.Librarie;
 using CIOBAN.Librarie.Basic;
 using CIOBAN.Librarie.RandomThings;
+using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
 using System;
 using System.Collections.Generic;
@@ -9,10 +10,13 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+/*
+* CIOBAN BENIAMIN
+* 3134A
+*/
 namespace CIOBAN.Scripturi
 {
-    internal class Triangle : GameObject
+    public class Triangle : GameObject
     {
 
         private KeyboardState lastFrameKeyboard;
@@ -33,7 +37,7 @@ namespace CIOBAN.Scripturi
             // L3
             // Initializeaza obiectul pentru citire date din fisier
             Administrare_Date administrare = new Administrare_Date(ConfigurationManager.AppSettings["NumeFisier"]);
-            triunghi.Position = administrare.GetCoords();
+            Transform.Position = administrare.GetCoords();
         }
 
         public override void Update()
@@ -79,7 +83,11 @@ namespace CIOBAN.Scripturi
         }
         public override void Draw()
         {
+            GL.PushMatrix();
+            GL.Translate(Transform.Position);
             triunghi.Draw();
+            GL.PopMatrix();
+            
         }
         public override string ToString()
         {

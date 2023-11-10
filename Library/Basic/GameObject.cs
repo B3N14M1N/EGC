@@ -3,9 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+/*
+* CIOBAN BENIAMIN
+* 3134A
+*/
 namespace CIOBAN.Librarie.Basic
 {
+    // O clasa abstracta care permite crearea unor obiecte 
+    // care pot fi modificate si randate
     public abstract class GameObject: IBehaviour, IRenderer
     {
         #region Parametri
@@ -20,14 +25,14 @@ namespace CIOBAN.Librarie.Basic
         {
             Transform = transform;
         }
+        #endregion
+        #region Methode
 
         public abstract void Start();
 
         public abstract void Update();
 
         public abstract void Draw();
-        #endregion
-        #region Methode
 
         #endregion
     }

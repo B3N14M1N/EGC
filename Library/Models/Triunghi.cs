@@ -14,12 +14,11 @@ using CIOBAN.Librarie.RandomThings;
 namespace CIOBAN.Librarie
 {
     // L3
-    // Un triunghi caruia i se pot schimba
-    // pozitia, culoarea si vizibilitatea
+    // Un model 3d triunghi
+    // caruia i se pot modifica culorile
     public class Triunghi
     {
         #region Parametri
-        public Vector3 Position;
         public bool isVisible;
         public bool uniColor;
         public Color ver1Color;
@@ -29,30 +28,22 @@ namespace CIOBAN.Librarie
 
         #region Constructori
         public Triunghi() {
-            Position = Vector3.Zero;
             isVisible = true;
             uniColor = false;
             ver1Color = RandomThings.RandomThings.GetRandomColor(10);
             ver2Color = RandomThings.RandomThings.GetRandomColor(100);
             ver3Color = RandomThings.RandomThings.GetRandomColor(1000);
         }
-        public Triunghi(Vector3 position)
+        public Triunghi( Color color)
         {
-            Position = position;
-            isVisible = true;
-        }
-        public Triunghi(Vector3 position, Color color)
-        {
-            Position = position;
             isVisible = true;
             uniColor = true;
             ver1Color = color;
             ver2Color = color;
             ver3Color = color;
         }
-        public Triunghi(Vector3 position, Color ver1Color, Color ver2Color, Color ver3Color)
+        public Triunghi( Color ver1Color, Color ver2Color, Color ver3Color)
         {
-            Position = position;
             isVisible = true;
             uniColor = false;
             this.ver1Color = ver1Color;
@@ -68,15 +59,15 @@ namespace CIOBAN.Librarie
             {
                 GL.Begin(PrimitiveType.Triangles);
                 GL.Color4(ver1Color);
-                GL.Vertex3(Position.X, Position.Y + 1, Position.Z);
+                GL.Vertex3(0, 1, 0);
 
                 if(!uniColor)
                     GL.Color4(ver2Color);
-                GL.Vertex3(Position.X + 1, Position.Y, Position.Z);
+                GL.Vertex3( 1, 0, 0);
 
                 if (!uniColor)
                     GL.Color4(ver3Color);
-                GL.Vertex3(Position.X, Position.Y, Position.Z + 1);
+                GL.Vertex3(0, 0, 1);
 
                 GL.End();
             }

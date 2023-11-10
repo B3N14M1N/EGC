@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace CIOBAN.Librarie
 {
     // L4 
-    // Un model 3d
+    // Un model 3d pentru cub
     public class Cub
     {
         #region Parametri

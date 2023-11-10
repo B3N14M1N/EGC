@@ -64,12 +64,12 @@
     <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Library\Administrare_Date.cs" />
+    <Compile Include="Library\Basic\Administrare_Date.cs" />
     <Compile Include="Library\Basic\IBehaviour.cs" />
     <Compile Include="Library\Basic\GameObject.cs" />
     <Compile Include="Library\Basic\Time.cs" />
     <Compile Include="Library\Basic\Transform.cs" />
-    <Compile Include="Library\Camera.cs" />
+    <Compile Include="Library\Basic\Camera.cs" />
     <Compile Include="Library\Models\Cub.cs" />
     <Compile Include="Library\RandomThings\RandomThings.cs" />
     <Compile Include="Library\Basic\IRenderer.cs" />
