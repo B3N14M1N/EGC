@@ -1,6 +1,6 @@
 ﻿using CIOBAN.Librarie;
 using CIOBAN.Librarie.Basic;
-using CIOBAN.Librarie.RandomThings;
+using CIOBAN.Librarie.Randomizer;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
 using System;

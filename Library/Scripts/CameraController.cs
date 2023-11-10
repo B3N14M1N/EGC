@@ -18,11 +18,11 @@ namespace CIOBAN.Scripturi
 
         // Folosesc clasa creata "Camera"
         // pentru a putea controla view-ul scenei
-        public Camera camera = new Camera(new Vector3(0, 3, 10));
+        public Camera camera = new Camera(new Vector3(0, 5, 25));
         // "movementSpeed" si "mouseSensitivity"
         // determina sensivitatea controlului camerei
-        private float mouseSensitivity = 0.1f;
-        private float movementSpeed = 2f;
+        private float mouseSensitivity = 0.2f;
+        private float movementSpeed = 3f;
         // Un set de key pentru determinarea inputului
         // care va misca camera
         private readonly Key cameraForwardKey = Key.W;

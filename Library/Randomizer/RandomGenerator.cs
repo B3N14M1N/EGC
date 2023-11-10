@@ -7,20 +7,15 @@ using OpenTK.Platform;
 using CIOBAN.Librarie;
 using System.Configuration;
 using OpenTK.Graphics;
-namespace CIOBAN.Librarie.RandomThings
+namespace CIOBAN.Librarie.Randomizer
 {
     public static class RandomGenerator
     {
+        static Random rnd = new Random();
         // L3
         // Functie pentru generarea unei culor aleatorie
         public static Color GetRandomColor()
         {
-            Random rnd = new Random();
-            return Color.FromArgb(rnd.Next(0, 256), rnd.Next(0, 256), rnd.Next(0, 256), rnd.Next(0, 256));
-        }
-        public static Color GetRandomColor(int seed)
-        {
-            Random rnd = new Random(seed);
             return Color.FromArgb(rnd.Next(0, 256), rnd.Next(0, 256), rnd.Next(0, 256), rnd.Next(0, 256));
         }
         /// <summary>
@@ -33,7 +28,6 @@ namespace CIOBAN.Librarie.RandomThings
         /// <param name="point2"></param>
         /// <returns></returns>
         public static Vector3 GetRandomVector3(Vector3 point1, Vector3 point2) {
-            Random rnd = new Random();
             return new Vector3(rnd.Next((int)point1.X,(int)point2.X), rnd.Next((int)point1.Y, (int)point2.Y), rnd.Next((int)point1.Z, (int)point2.Z));
         }
 

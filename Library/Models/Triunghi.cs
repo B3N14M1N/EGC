@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CIOBAN.Librarie.RandomThings;
+using CIOBAN.Librarie.Randomizer;
 /*
  * CIOBAN BENIAMIN
  * 3134A
@@ -28,9 +28,9 @@ namespace CIOBAN.Librarie
         #region Constructori
         public Triunghi() {
             isVisible = true;
-            ver1Color = RandomThings.RandomGenerator.GetRandomColor(10);
-            ver2Color = RandomThings.RandomGenerator.GetRandomColor(100);
-            ver3Color = RandomThings.RandomGenerator.GetRandomColor(1000);
+            ver1Color = RandomGenerator.GetRandomColor();
+            ver2Color = RandomGenerator.GetRandomColor();
+            ver3Color = RandomGenerator.GetRandomColor();
         }
         public Triunghi( Color color)
         {

@@ -22,7 +22,19 @@ namespace CIOBAN.Librarie.Basic
         public Transform() { 
             Position = new Vector3();
             Rotation = new Quaternion();
-            Scale = new Vector3();
+            Scale = new Vector3(1f,1f,1f);
+        }
+        public Transform(Vector3 position)
+        {
+            Position = position;
+            Rotation = new Quaternion();
+            Scale = new Vector3(1f, 1f, 1f);
+        }
+        public Transform(Vector3 position, Quaternion rotation, Vector3 scale)
+        {
+            Position = position;
+            Rotation = rotation;
+            Scale = scale;
         }
     }
 }

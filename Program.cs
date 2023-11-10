@@ -7,7 +7,7 @@ using OpenTK.Platform;
 using CIOBAN.Librarie;
 using System.Configuration;
 using OpenTK.Graphics;
-using CIOBAN.Librarie.RandomThings;
+using CIOBAN.Librarie.Randomizer;
 using CIOBAN.Librarie.Basic;
 using CIOBAN.Scripturi;
 using System.Collections.Generic;
@@ -21,6 +21,9 @@ namespace CIOBAN
     class Program : GameWindow
     {
         #region Parametrii
+
+        IRenderer skyBlock = new Cub(500);
+
         // Laboratorul 2
         #region L2
         private KeyboardState lastFrameKeyboard;
@@ -203,6 +206,7 @@ namespace CIOBAN
             //L4 Apeleaza metodele de start
             triangle.Start();
             fallingObject.Start();
+            skyBlock.SetColors(new List<Color>() { RandomGenerator.GetRandomColor(),RandomGenerator.GetRandomColor() });
         }
         protected override void OnResize(EventArgs e)
         {
@@ -245,6 +249,7 @@ namespace CIOBAN
             }
             fallingObject.Draw();
             triangle.Draw();
+            skyBlock.Draw();
             SwapBuffers();
         }
         #endregion
