@@ -238,7 +238,7 @@ namespace CIOBAN
             // Randeaza un grid
             // Randeaza axele de coordonate
             cameraController.Draw();
-            DrawGrid(Color.White,16);
+            DrawGrid(Color.White,20);
             DrawAxes();
             // L2
             // Randeaza triunghiul doar daca 

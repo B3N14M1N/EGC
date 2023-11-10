@@ -29,15 +29,19 @@ namespace CIOBAN.Scripturi
         #region Logic
         private bool isFalling = false;
         private bool onGround = false;
+
+
+        private const float GRAVITY = 9.8f; // m/s^2
         private float initialY; // Pozitia initiala (din fisier)
         private float fallingSpeed = 1f; // m/s
         private float size = 1f;
-        private const float GRAVITY = 9.8f; // m/s^2
+
         private Key colorChangeKey = Key.B;
         private KeyboardState lastKeyboardState;
         // Am creat o lista de Transforms pentru a genera noi obiecte la
         // pozitii aleatorii.
         // Modelul 3d este reutilizat!
+        private const float MAX_DISTANCE = 20f; // Dimensiunea (lungimea) ariei unde se pot genera
         private int counts = 0;
         private List<Transform> transforms = new List<Transform>();
         private Key addObject = Key.Right;
@@ -72,7 +76,7 @@ namespace CIOBAN.Scripturi
             // Initializare lista cu pozitii diferite
             for (int i = 0; i < counts; i++)
             {
-                transforms.Add(new Transform(RandomGenerator.GetRandomVector3(new Vector3(-10, 1, -10), new Vector3(10, initialY, 10))));
+                transforms.Add(new Transform(RandomGenerator.GetRandomVector3(new Vector3(-MAX_DISTANCE, 1, -MAX_DISTANCE), new Vector3(MAX_DISTANCE, initialY, MAX_DISTANCE))));
             }
         }
         public override void Update()
@@ -96,7 +100,9 @@ namespace CIOBAN.Scripturi
                 bool changed=false;
                 if(keyboard.IsKeyDown(addObject) && !lastKeyboardState.IsKeyDown(addObject))
                 {
-                    transforms.Add(new Transform(RandomGenerator.GetRandomVector3(new Vector3(-10, 1, -10), new Vector3(10, initialY, 10))));
+                    transforms.Add(new Transform(RandomGenerator.GetRandomVector3(new Vector3(-MAX_DISTANCE, 1, -MAX_DISTANCE), new Vector3(MAX_DISTANCE, initialY, MAX_DISTANCE)),
+                        RandomGenerator.GetRandomVector3(new Vector3(0, -180, 0), new Vector3(0, 180, 0)),
+                        RandomGenerator.GetRandomVector3(new Vector3(1f, 1f, 1f), new Vector3(4, 4, 4))));
                     counts++;
                     changed = true;
                 }
@@ -108,7 +114,7 @@ namespace CIOBAN.Scripturi
                 }
                 if(changed)
                 {
-                    Console.WriteLine("\nObiecte curente:\t"+ counts);
+                    Console.WriteLine("Obiecte curente:\t"+ counts);
                 }
             }
 
@@ -117,6 +123,7 @@ namespace CIOBAN.Scripturi
             if (!isFalling && mouse.IsButtonDown(MouseButton.Left))
             {
                 cub = new Cub(size);
+                cub.SetColors(new List<Color>() { RandomGenerator.GetRandomColor(), RandomGenerator.GetRandomColor() });
                 fallingSpeed = 1f;
                 isFalling = true;
             }
@@ -143,20 +150,22 @@ namespace CIOBAN.Scripturi
 
                 foreach(Transform position in transforms)
                 {
-                    position.Position = RandomGenerator.GetRandomVector3(new Vector3(-10, 1, -10), new Vector3(10, initialY, 10));
+                    position.Position = RandomGenerator.GetRandomVector3(new Vector3(-MAX_DISTANCE, 1, -MAX_DISTANCE), new Vector3(MAX_DISTANCE, initialY, MAX_DISTANCE));
+                    position.Rotation = RandomGenerator.GetRandomVector3(new Vector3(0, -180, 0), new Vector3(0, 180, 0));
+                    position.Scale = RandomGenerator.GetRandomVector3(new Vector3(1f, 1f, 1f), new Vector3(4, 4, 4));
                 }
             }
             if(isFalling)
             {
                 foreach(Transform position in transforms)
                 {
-                    if (position.Position.Y >  size / 2)
+                    if (position.Position.Y >  position.Scale.Y * size / 2)
                     {
                         position.Position -= new Vector3(0f, fallingSpeed * (float)Time.deltaTime, 0f);
                     }
                     else
                     {
-                        position.Position = new Vector3(position.Position.X, size/2, position.Position.Z);
+                        position.Position = new Vector3(position.Position.X, position.Scale.Y * size / 2, position.Position.Z);
                     }
                 }
             }
@@ -173,6 +182,8 @@ namespace CIOBAN.Scripturi
             {
                 GL.PushMatrix();
                 GL.Translate(position.Position);
+                GL.Rotate(position.Rotation.Y,new Vector3(0f,1f,0f));
+                GL.Scale(position.Scale);
                 cub?.Draw();
                 GL.PopMatrix();
             }
