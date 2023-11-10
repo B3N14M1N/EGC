@@ -9,6 +9,7 @@ using OpenTK.Platform;
 using System.Configuration;
 using OpenTK.Graphics;
 using CIOBAN.Librarie.RandomThings;
+using System.Collections.Generic;
 /*
 * CIOBAN BENIAMIN
 * 3134A
@@ -31,7 +32,7 @@ namespace CIOBAN.Scripturi
         private bool onGround = false;
         private float initialY;
         private float fallingSpeed = 1f;
-
+        private float size = 1f;
         // Parametrii publici
         public float FallingSpeed { 
             get { return fallingSpeed; }
@@ -42,34 +43,18 @@ namespace CIOBAN.Scripturi
 
         #region Model 3d
         // Un model 3d
-        Cub cub;
+        IRenderer cub;
         #endregion
         #endregion
 
         #region Constructori
-        public FallingObject(float lenght)
-        {
-            Transform.Position = new Vector3();
-            cub = new Cub(lenght);
-            cub.Top = RandomThings.GetRandomColor(1);
-            cub.Bottom = RandomThings.GetRandomColor(10);
-            cub.isVisible = true;
-        }
         public FallingObject()
         {
             Transform.Position = new Vector3();
-            cub = new Cub();
-            cub.Top = RandomThings.GetRandomColor(1);
-            cub.Bottom = RandomThings.GetRandomColor(10);
-            cub.isVisible = true;
         }
-        public FallingObject(Vector3 position, float lenght)
+        public FallingObject(Vector3 position)
         {
             Transform.Position = position;
-            cub = new Cub(lenght);
-            cub.Top = RandomThings.GetRandomColor(1);
-            cub.Bottom = RandomThings.GetRandomColor(10);
-            cub.isVisible = true;
         }
         #endregion
 
@@ -87,24 +72,24 @@ namespace CIOBAN.Scripturi
             KeyboardState keyboard = Keyboard.GetState();
 
             // Verifica daca s-a apasat o data tasta pentru schimbarea culorii
-            if (keyboard.IsKeyDown(colorChangeKey) && !lastKeyboardState.IsKeyDown(colorChangeKey))
+            if (cub!=null && keyboard.IsKeyDown(colorChangeKey) && !lastKeyboardState.IsKeyDown(colorChangeKey))
             {
                 // Genereaza culori aleatorii pentru Top si Bottom
                 Random seed = new Random();
-                cub.Top = RandomThings.GetRandomColor(seed.Next());
-                cub.Bottom = RandomThings.GetRandomColor();
+                cub.SetColors(new List<Color>() { RandomThings.GetRandomColor(seed.Next()), RandomThings.GetRandomColor(seed.Next()) });
                 Console.WriteLine(cub.ToString());
             }
             // Daca nu cade si daca e apasat butonul stanga mouse
             // seteaza obiectul sa cada
             if (!isFalling && mouse.IsButtonDown(MouseButton.Left))
             {
+                cub = new Cub(size);
                 isFalling = true;
             }
-            if(isFalling&& !onGround)
+            if(isFalling && !onGround)
             {
                 Transform.Position -= new Vector3(0f, FallingSpeed * (float)Time.deltaTime, 0f);
-                if (Transform.Position.Y <= cub.Length / 2)
+                if (Transform.Position.Y <= size / 2)
                 { 
                     isFalling = false;
                     onGround = true;
@@ -112,6 +97,7 @@ namespace CIOBAN.Scripturi
             }
             if(onGround && mouse.IsButtonDown(MouseButton.Right))
             {
+                cub = null;
                 Transform.Position = new Vector3(Transform.Position.X, initialY, Transform.Position.Z);
                 isFalling = false;
                 onGround = false;
@@ -124,7 +110,7 @@ namespace CIOBAN.Scripturi
         {
             GL.PushMatrix();
             GL.Translate(Transform.Position);
-            cub.Draw();
+            cub?.Draw();
             GL.PopMatrix();
         }
         public override string ToString()

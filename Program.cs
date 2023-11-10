@@ -45,7 +45,7 @@ namespace CIOBAN
         // Laboratorul 4 ---- in progres
         #region L4 - L5
         // L4
-        FallingObject fallingObject = new FallingObject(RandomThings.GetRandomVector3(new Vector3(-1,1,-1), new Vector3(1,5,1)),0.5f);
+        FallingObject fallingObject = new FallingObject(RandomThings.GetRandomVector3(new Vector3(-1,1,-1), new Vector3(1,5,1)));
         #endregion
         #endregion
         #region Constructor
@@ -65,8 +65,10 @@ namespace CIOBAN
             Console.Write(cameraController.ToString() +
                 fallingObject.ToString() +
                 triangle.ToString() +
-                "\tTriunghi randat - Mouse (miscare axe X,Y), Rotita (scalarea)\n" +
-                "\t\t Q (blocare miscare), E (Randare).\n");
+                "\nControl Triunghi randat pe XY:" +
+                "\n\tMiscare axe X,Y - Mouse,\n\tScalare - Rotita," +
+                "\n\tBlocare miscare - " + moveTriangleKey +
+                ",\n\tRandare - " + renderTriangleKey + ".\n");
         }
         // Functie in care prelucreaza inputul pentru modificarea ferestrei
         #endregion

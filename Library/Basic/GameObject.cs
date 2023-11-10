@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,6 +34,11 @@ namespace CIOBAN.Librarie.Basic
         public abstract void Update();
 
         public abstract void Draw();
+
+        public void SetColors(List<Color> colors)
+        {
+            throw new NotImplementedException();
+        }
 
         #endregion
     }

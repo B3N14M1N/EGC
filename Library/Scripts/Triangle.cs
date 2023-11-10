@@ -21,9 +21,10 @@ namespace CIOBAN.Scripturi
 
         private KeyboardState lastFrameKeyboard;
         // Un triunghi 
-        Triunghi triunghi = new Triunghi();
+        IRenderer triunghi = new Triunghi();
         // Un set de key pentru schimbarea 
         // colorilor triunghiului randat
+        public bool uniColor=false;
         private readonly Key UniColor = Key.V;
         private readonly Key change1Key = Key.Z;
         private Color color1 = Color.White;
@@ -49,24 +50,26 @@ namespace CIOBAN.Scripturi
             // variabila locala schimbat verifica daca s-au schimbat vre-o culoare
             // ca sa afiseze numai o singura data la tastatura;
             if (keyboard.IsKeyDown(UniColor) && lastFrameKeyboard.IsKeyUp(UniColor))
-                triunghi.uniColor = !triunghi.uniColor;
+                uniColor = !uniColor;
             bool schimbat = false;
             if (keyboard.IsKeyDown(change1Key) && lastFrameKeyboard.IsKeyUp(change1Key))
             {
                 color1 = RandomThings.GetRandomColor();
+                if (uniColor)
+                {
+                    color2 = color3 = color1;
+                }
                 schimbat = true;
             }
-            if (keyboard.IsKeyDown(change2Key) && lastFrameKeyboard.IsKeyUp(change2Key))
+            if (!uniColor && keyboard.IsKeyDown(change2Key) && lastFrameKeyboard.IsKeyUp(change2Key))
             {
                 color2 = RandomThings.GetRandomColor();
-                if (!triunghi.uniColor)
-                    schimbat = true;
+                schimbat = true;
             }
-            if (keyboard.IsKeyDown(change3Key) && lastFrameKeyboard.IsKeyUp(change3Key))
+            if (!uniColor && keyboard.IsKeyDown(change3Key) && lastFrameKeyboard.IsKeyUp(change3Key))
             {
                 color3 = RandomThings.GetRandomColor();
-                if (!triunghi.uniColor)
-                    schimbat = true;
+                schimbat = true;
             }
             // L3
             // Daca s-au schimbat vre-o culoare afiseaza culorile triunghiului la consola
@@ -74,9 +77,10 @@ namespace CIOBAN.Scripturi
             {
                 // uniColor de setat pe false pentru modificarea
                 // culorii fiecarui vertex
-                triunghi.ver1Color = color1;
-                triunghi.ver2Color = color2;
-                triunghi.ver3Color = color3;
+                if (uniColor)
+                    triunghi.SetColors(new List<Color>() { color1});
+                else
+                    triunghi.SetColors(new List<Color>() { color1, color2, color3 });
                 Console.WriteLine(triunghi.ToString());
             }
             lastFrameKeyboard = keyboard;

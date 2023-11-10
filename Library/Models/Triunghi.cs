@@ -16,11 +16,10 @@ namespace CIOBAN.Librarie
     // L3
     // Un model 3d triunghi
     // caruia i se pot modifica culorile
-    public class Triunghi
+    public class Triunghi: IRenderer
     {
         #region Parametri
         public bool isVisible;
-        public bool uniColor;
         public Color ver1Color;
         public Color ver2Color;
         public Color ver3Color;
@@ -29,7 +28,6 @@ namespace CIOBAN.Librarie
         #region Constructori
         public Triunghi() {
             isVisible = true;
-            uniColor = false;
             ver1Color = RandomThings.RandomThings.GetRandomColor(10);
             ver2Color = RandomThings.RandomThings.GetRandomColor(100);
             ver3Color = RandomThings.RandomThings.GetRandomColor(1000);
@@ -37,7 +35,6 @@ namespace CIOBAN.Librarie
         public Triunghi( Color color)
         {
             isVisible = true;
-            uniColor = true;
             ver1Color = color;
             ver2Color = color;
             ver3Color = color;
@@ -45,7 +42,6 @@ namespace CIOBAN.Librarie
         public Triunghi( Color ver1Color, Color ver2Color, Color ver3Color)
         {
             isVisible = true;
-            uniColor = false;
             this.ver1Color = ver1Color;
             this.ver2Color = ver2Color;
             this.ver3Color = ver3Color;
@@ -60,21 +56,30 @@ namespace CIOBAN.Librarie
                 GL.Begin(PrimitiveType.Triangles);
                 GL.Color4(ver1Color);
                 GL.Vertex3(0, 1, 0);
-
-                if(!uniColor)
-                    GL.Color4(ver2Color);
+                GL.Color4(ver2Color);
                 GL.Vertex3( 1, 0, 0);
-
-                if (!uniColor)
-                    GL.Color4(ver3Color);
+                GL.Color4(ver3Color);
                 GL.Vertex3(0, 0, 1);
 
                 GL.End();
             }
         }
+
+        public void SetColors(List<Color> colors)
+        {
+            if (colors == null || colors.Count == 0) return;
+            if(colors.Count > 2) {
+                ver1Color = colors[0];
+                ver2Color = colors[1];
+                ver3Color = colors[2];
+                return;
+            }
+            ver1Color = ver2Color = ver3Color = colors[0];
+        }
+
         public override string ToString()
         {
-            return !isVisible ? "" : uniColor?
+            return !isVisible ? "" : (ver1Color == ver2Color && ver2Color == ver3Color) ?
                 "\nCuloare triunghi: "+ ver1Color.ToString() + "\n" : 
                 "Culori triunghi:\nVer1: " + ver1Color.ToString() +
                 "\nVer2: " + ver2Color.ToString() +

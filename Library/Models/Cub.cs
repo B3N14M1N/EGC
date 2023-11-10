@@ -14,7 +14,7 @@ namespace CIOBAN.Librarie
 {
     // L4 
     // Un model 3d pentru cub
-    public class Cub
+    public class Cub: IRenderer
     {
         #region Parametri
         public bool isVisible;
@@ -100,6 +100,18 @@ namespace CIOBAN.Librarie
         {
             return "Culori Cub:\nTop: " + Top.ToString() +
                 "\nBottom: " + Bottom.ToString() + "\n";
+        }
+
+        public void SetColors(List<Color> colors)
+        {
+            if(colors == null || colors.Count == 0) return;
+            if(colors.Count == 1)
+            {
+                Top = Bottom = colors.First();
+                return;
+            }
+            Top = colors[0];
+            Bottom = colors[1];
         }
         #endregion
     }
