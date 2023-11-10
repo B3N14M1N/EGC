@@ -23,6 +23,8 @@ namespace CIOBAN
         // Laboratorul 2
         #region L2
         private KeyboardState lastFrameKeyboard;
+        private float rotX = 0;
+        private float rotY = 0;
 
         private Key moveTriangleKey = Key.Q;
         private bool moveTriangle = true;
@@ -38,27 +40,13 @@ namespace CIOBAN
         // Laboratorul 3
         #region L3
         CameraController cameraController = new CameraController();
-        // Un triunghi 
-        Triunghi triunghi = new Triunghi();
-        private float rotX = 0;
-        private float rotY = 0;
-        // Un set de key pentru schimbarea 
-        // colorilor triunghiului randat
-        private readonly Key UniColor = Key.V;
-        private readonly Key change1Key = Key.Z;
-        private Color color1 = Color.White;
-        private readonly Key change2Key = Key.X;
-        private Color color2 = Color.White;
-        private readonly Key change3Key = Key.C;
-        private Color color3 = Color.White;
-
-        Administrare_Date administrare;
+        Triangle triangle = new Triangle(); 
         #endregion
         // Laboratorul 4 ---- in progres
         #region L4
         // L4
-        //Cub cub = new Cub(new Vector3(-.25f,.25f,-.25f),0.5f);
-        FallingCube cub = new FallingCube(RandomThings.GetRandomVector3(new Vector3(-1,1,-1), new Vector3(1,5,1)),0.5f);
+        //Cub fallingObject = new Cub(new Vector3(-.25f,.25f,-.25f),0.5f);
+        FallingObject fallingObject = new FallingObject(RandomThings.GetRandomVector3(new Vector3(-1,1,-1), new Vector3(1,5,1)),0.5f);
         #endregion
         #endregion
         #region Constructor
@@ -66,10 +54,6 @@ namespace CIOBAN
         {
             KeyDown += WindowSettings;
 
-            // L3
-            // Initializeaza obiectul pentru citire date din fisier
-            administrare = new Administrare_Date(ConfigurationManager.AppSettings["NumeFisier"]);
-            triunghi.Position = administrare.GetCoords();
 
             // Ascunde cursorul si il limiteaza doar in window
             CursorGrabbed = true;
@@ -77,11 +61,13 @@ namespace CIOBAN
 
             Console.Clear();
             Console.WriteLine("Student: Cioban Beniamin\nGrupa: 3134a\n\n" +
+                "Console Clear + Show Controls: F2\n"+
                 "Window Controls:\n\tWindow - F11, Cursor - F1\n");
             Console.Write(cameraController.ToString() +
+                fallingObject.ToString() +
+                triangle.ToString() +
                 "\tTriunghi randat - Mouse (miscare axe X,Y), Rotita (scalarea)\n" +
-                "\t\t Q (blocare miscare), E (Randare).\n" +
-                "\tSchimbari culori - Z (vertex1), X (vertex2), C (vertex3).\n");
+                "\t\t Q (blocare miscare), E (Randare).\n");
         }
         // Functie in care prelucreaza inputul pentru modificarea ferestrei
         #endregion
@@ -97,6 +83,18 @@ namespace CIOBAN
             {
                 CursorGrabbed = !CursorGrabbed;
                 CursorVisible = !CursorVisible;
+            }
+            if(e.Key == Key.F2)
+            {
+                Console.Clear();
+                Console.WriteLine("Student: Cioban Beniamin\nGrupa: 3134a\n\n" +
+                    "Console Clear + Show Controls: F2\n" +
+                    "Window Controls:\n\tWindow - F11, Cursor - F1\n");
+                Console.Write(cameraController.ToString() +
+                    fallingObject.ToString() +
+                    triangle.ToString() +
+                    "\tTriunghi randat - Mouse (miscare axe X,Y), Rotita (scalarea)\n" +
+                    "\t\t Q (blocare miscare), E (Randare).\n");
             }
         }
         #endregion
@@ -131,42 +129,6 @@ namespace CIOBAN
                     poz.Z = .1f;
                 zPoz = mouse.WheelPrecise;
             }
-
-            // L3
-            // Prelucreaza inputul pentru a seta culori noi vertexurilor triunghiului
-            // variabila locala schimbat verifica daca s-au schimbat vre-o culoare
-            // ca sa afiseze numai o singura data la tastatura;
-            if (keyboard.IsKeyDown(UniColor) && lastFrameKeyboard.IsKeyUp(UniColor))
-                triunghi.uniColor = !triunghi.uniColor;
-            bool schimbat = false;
-            if (keyboard.IsKeyDown(change1Key) && lastFrameKeyboard.IsKeyUp(change1Key))
-            { 
-                color1 = RandomThings.GetRandomColor();
-                schimbat = true;
-            }
-            if (keyboard.IsKeyDown(change2Key) && lastFrameKeyboard.IsKeyUp(change2Key))
-            { 
-                color2 = RandomThings.GetRandomColor();
-                if(!triunghi.uniColor)
-                    schimbat = true;
-            }
-            if (keyboard.IsKeyDown(change3Key) && lastFrameKeyboard.IsKeyUp(change3Key))
-            {
-                color3 = RandomThings.GetRandomColor();
-                if (!triunghi.uniColor)
-                    schimbat = true;
-            }
-            // L3
-            // Daca s-au schimbat vre-o culoare afiseaza culorile triunghiului la consola
-            if (schimbat)
-            {
-                // uniColor de setat pe false pentru modificarea
-                // culorii fiecarui vertex
-                triunghi.ver1Color = color1;
-                triunghi.ver2Color = color2;
-                triunghi.ver3Color = color3;
-                Console.WriteLine(triunghi.ToString());
-            }
             // L3
             // Updateaza rotatiile precedente cu a mouse-ului
             rotX = mouse.X;
@@ -182,11 +144,9 @@ namespace CIOBAN
         public void DrawTriangle(float x, float y, float z)
         {
             GL.Begin(PrimitiveType.Triangles);
-            GL.Color3(color1);
+            GL.Color3(Color.Purple);
             GL.Vertex3(x - z, y + z, 0);
-            GL.Color3(color2);
             GL.Vertex3(x, y - z, 0);
-            GL.Color3(color3);
             GL.Vertex3(x + z, y + z, 0);
             GL.End();
         }
@@ -239,8 +199,8 @@ namespace CIOBAN
             // L2 preia valoarea curenta a rotitei mouse-ului
             zPoz = Mouse.GetState().WheelPrecise;
             //L4 Apeleaza metodele de start
-            cub.colorChangeKey = change1Key;
-            cub.Start();
+            triangle.Start();
+            fallingObject.Start();
         }
         protected override void OnResize(EventArgs e)
         {
@@ -265,7 +225,8 @@ namespace CIOBAN
             base.OnUpdateFrame(e);
             Time.deltaTime = e.Time;
             GetInput();
-            cub.Update();
+            triangle.Update();
+            fallingObject.Update();
             cameraController.Update();
         }
         protected override void OnRenderFrame(FrameEventArgs e)
@@ -287,8 +248,8 @@ namespace CIOBAN
             {
                 DrawTriangle(poz.X, poz.Y, poz.Z);
             }
-            cub.Draw();
-            triunghi.Draw();
+            fallingObject.Draw();
+            triangle.Draw();
             SwapBuffers();
         }
         #endregion

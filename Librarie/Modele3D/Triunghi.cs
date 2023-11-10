@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CIOBAN.Librarie.RandomThings;
 /*
  * CIOBAN BENIAMIN
  * 3134A
@@ -31,9 +32,9 @@ namespace CIOBAN.Librarie
             Position = Vector3.Zero;
             isVisible = true;
             uniColor = false;
-            ver1Color = Color.White;
-            ver2Color = Color.White;
-            ver3Color = Color.White;
+            ver1Color = RandomThings.RandomThings.GetRandomColor(10);
+            ver2Color = RandomThings.RandomThings.GetRandomColor(100);
+            ver3Color = RandomThings.RandomThings.GetRandomColor(1000);
         }
         public Triunghi(Vector3 position)
         {
@@ -83,7 +84,7 @@ namespace CIOBAN.Librarie
         public override string ToString()
         {
             return !isVisible ? "" : uniColor?
-                "Culoare triunghi: "+ ver1Color.ToString() + "\n" : 
+                "\nCuloare triunghi: "+ ver1Color.ToString() + "\n" : 
                 "Culori triunghi:\nVer1: " + ver1Color.ToString() +
                 "\nVer2: " + ver2Color.ToString() +
                 "\nVer3: " + ver3Color.ToString() + "\n";

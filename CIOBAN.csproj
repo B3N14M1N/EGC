@@ -73,10 +73,11 @@
     <Compile Include="Librarie\Modele3D\Cub.cs" />
     <Compile Include="Librarie\RandomThings\RandomThings.cs" />
     <Compile Include="Librarie\Basic\IRenderer.cs" />
-    <Compile Include="Librarie\Triunghi.cs" />
+    <Compile Include="Librarie\Modele3D\Triunghi.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Scripturi\CameraController.cs" />
-    <Compile Include="Scripturi\FallingCube.cs" />
+    <Compile Include="Scripturi\FallingObject.cs" />
+    <Compile Include="Scripturi\Triangle.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8.1">

@@ -96,6 +96,11 @@ namespace CIOBAN.Librarie
                 GL.End();
             }
         }
+        public override string ToString()
+        {
+            return "Culori Cub:\nTop: " + Top.ToString() +
+                "\nBottom: " + Bottom.ToString() + "\n";
+        }
         #endregion
     }
 }

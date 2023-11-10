@@ -22,7 +22,7 @@ namespace CIOBAN.Scripturi
     // mostenit din "GameObject".
     // In metoda Update se proceseaza evenimete pentru
     // a face cubul sa cada, si alte modificari (ex. schimbare culoare)
-    public class FallingCube : GameObject
+    public class FallingObject : GameObject
     {
         #region Parametri
         #region Falling
@@ -37,15 +37,17 @@ namespace CIOBAN.Scripturi
             get { return fallingSpeed; }
             set { fallingSpeed=value>0?value:1f;}
         }
-        public Key colorChangeKey = Key.Z;
+        public Key colorChangeKey = Key.B;
         #endregion
-        #region Model
+
+        #region Model 3d
+        // Un model 3d
         Cub cub;
         #endregion
         #endregion
 
         #region Constructori
-        public FallingCube(float lenght)
+        public FallingObject(float lenght)
         {
             Transform.Position = new Vector3();
             cub = new Cub(lenght);
@@ -53,7 +55,7 @@ namespace CIOBAN.Scripturi
             cub.Bottom = RandomThings.GetRandomColor(10);
             cub.isVisible = true;
         }
-        public FallingCube()
+        public FallingObject()
         {
             Transform.Position = new Vector3();
             cub = new Cub();
@@ -61,7 +63,7 @@ namespace CIOBAN.Scripturi
             cub.Bottom = RandomThings.GetRandomColor(10);
             cub.isVisible = true;
         }
-        public FallingCube(Vector3 position, float lenght)
+        public FallingObject(Vector3 position, float lenght)
         {
             Transform.Position = position;
             cub = new Cub(lenght);
@@ -73,6 +75,8 @@ namespace CIOBAN.Scripturi
 
         public override void Start()
         {
+            Administrare_Date date = new Administrare_Date(ConfigurationManager.AppSettings["NumeFisier"]);
+            Transform.Position = date.GetCoords();
             lastKeyboardState = Keyboard.GetState();
             initialY=Transform.Position.Y;
         }
@@ -89,6 +93,7 @@ namespace CIOBAN.Scripturi
                 Random seed = new Random();
                 cub.Top = RandomThings.GetRandomColor(seed.Next());
                 cub.Bottom = RandomThings.GetRandomColor();
+                Console.WriteLine(cub.ToString());
             }
             // Daca nu cade si daca e apasat butonul stanga mouse
             // seteaza obiectul sa cada
@@ -121,6 +126,13 @@ namespace CIOBAN.Scripturi
             GL.Translate(Transform.Position);
             cub.Draw();
             GL.PopMatrix();
+        }
+        public override string ToString()
+        {
+            return "\nFalling Object Controls:" +
+                "\n\tFall - Mouse." + MouseButton.Left +
+                ",\n\tReset - Mouse."+ MouseButton.Right +
+                ",\n\tColor change - " + colorChangeKey +".\n";
         }
     }
 }
