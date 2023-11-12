@@ -42,7 +42,7 @@ namespace CIOBAN.Scripturi
         // pozitii aleatorii.
         // Modelul 3d este reutilizat!
         private const float MAX_DISTANCE = 20f; // Dimensiunea (lungimea) ariei unde se pot genera
-        private int counts = 0;
+        private int counts = 100;
         private List<Transform> transforms = new List<Transform>();
         private Key addObject = Key.Right;
         private Key removeObject = Key.Left;
@@ -76,7 +76,7 @@ namespace CIOBAN.Scripturi
             // Initializare lista cu pozitii diferite
             for (int i = 0; i < counts; i++)
             {
-                transforms.Add(new Transform(RandomGenerator.GetRandomVector3(new Vector3(-MAX_DISTANCE, 1, -MAX_DISTANCE), new Vector3(MAX_DISTANCE, initialY, MAX_DISTANCE))));
+                transforms.Add(GenerateRandomTransform());
             }
         }
         public override void Update()
@@ -100,9 +100,7 @@ namespace CIOBAN.Scripturi
                 bool changed=false;
                 if(keyboard.IsKeyDown(addObject) && !lastKeyboardState.IsKeyDown(addObject))
                 {
-                    transforms.Add(new Transform(RandomGenerator.GetRandomVector3(new Vector3(-MAX_DISTANCE, 1, -MAX_DISTANCE), new Vector3(MAX_DISTANCE, initialY, MAX_DISTANCE)),
-                        RandomGenerator.GetRandomVector3(new Vector3(0, -180, 0), new Vector3(0, 180, 0)),
-                        RandomGenerator.GetRandomVector3(new Vector3(1f, 1f, 1f), new Vector3(4, 4, 4))));
+                    transforms.Add(GenerateRandomTransform());
                     counts++;
                     changed = true;
                 }
@@ -148,13 +146,15 @@ namespace CIOBAN.Scripturi
                 isFalling = false;
                 onGround = false;
 
-                foreach(Transform position in transforms)
+                for(int i = 0; i < transforms.Count; i++)
                 {
-                    position.Position = RandomGenerator.GetRandomVector3(new Vector3(-MAX_DISTANCE, 1, -MAX_DISTANCE), new Vector3(MAX_DISTANCE, initialY, MAX_DISTANCE));
-                    position.Rotation = RandomGenerator.GetRandomVector3(new Vector3(0, -180, 0), new Vector3(0, 180, 0));
-                    position.Scale = RandomGenerator.GetRandomVector3(new Vector3(1f, 1f, 1f), new Vector3(4, 4, 4));
+                    transforms[i] = GenerateRandomTransform();
                 }
             }
+
+            // Daca cade, scade din lista de transforms, din poz.Y pentru a da impresia de cadere
+            // daca ajunge la planul Y=0, seteaza Y=0 (erau unele cazuri in care se opreau sub 0)
+            // Se ia in considerare scalarea pe Y
             if(isFalling)
             {
                 foreach(Transform position in transforms)
@@ -172,6 +172,14 @@ namespace CIOBAN.Scripturi
             lastKeyboardState=keyboard;
         }
 
+        // Genereaza un Transform cu pozitie, rotatie si scala aleatorie
+        private Transform GenerateRandomTransform()
+        {
+            return new Transform(
+                RandomGenerator.GetRandomVector3f(new Vector3(-MAX_DISTANCE, 1, -MAX_DISTANCE), new Vector3(MAX_DISTANCE, initialY, MAX_DISTANCE)),
+                RandomGenerator.GetRandomVector3(new Vector3(0f, -180f, 0f), new Vector3(0f, 180f, 0f)),
+                RandomGenerator.GetRandomVector3f(new Vector3(0.25f, 0.25f, 0.25f), new Vector3(2.5f, 2.5f, 2.5f)));
+        }
         public override void Draw()
         {
             GL.PushMatrix();

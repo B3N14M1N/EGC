@@ -34,6 +34,13 @@ namespace CIOBAN.Librarie.Randomizer
         public static Vector3 GetRandomVector3(Vector3 point1, Vector3 point2) {
             return new Vector3(rnd.Next((int)point1.X,(int)point2.X), rnd.Next((int)point1.Y, (int)point2.Y), rnd.Next((int)point1.Z, (int)point2.Z));
         }
+        public static Vector3 GetRandomVector3f(Vector3 point1, Vector3 point2)
+        {
+            Vector3 dif=point2-point1;
+            return new Vector3(point1.X + (float)rnd.NextDouble()* dif.X,
+                point1.Y + (float)rnd.NextDouble() * dif.Y,
+                point1.Z + (float)rnd.NextDouble() * dif.Z);
+        }
 
     }
 }
