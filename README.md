@@ -3,18 +3,16 @@
 
 ### Taste
 #### Window, Cursor
-  `F1` - ascunde/afiseaza cursorul
+  `F1` - ascunde/afiseaza cursorul.
   
-  `F11` - modul *windowed* sau *fullscreen*
-
-  `F2` - goleşte consola şi afişeaza informații pentru controale
+  `F11` - modul *windowed* sau *fullscreen*.
 #### Control camera
-  `W, A, S, D, LShift, LControl` - controlul camerei
+  `W, A, S, D, LShift, LControl` - controlul camerei.
   
-  `Num1` - de/blocheaza controlul camerei
+  `Num1` - de/blocheaza controlul camerei.
   
-  `Mouse` roteste camera
+  `Mouse` roteste camera.
 #### Control pentru exercitii
    Afișate în consolă.
    
-  `F2` - Curăță consola și afișează informații despre controale.
+  `F2` - goleşte consola şi afişeaza informații pentru controale.
