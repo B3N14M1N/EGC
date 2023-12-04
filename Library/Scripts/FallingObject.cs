@@ -118,12 +118,13 @@ namespace CIOBAN.Scripturi
 
             // Daca nu cade si daca e apasat butonul stanga mouse
             // seteaza obiectul sa cada
-            if (!isFalling && mouse.IsButtonDown(MouseButton.Left))
+            if (!isFalling && !onGround && mouse.IsButtonDown(MouseButton.Left))
             {
                 cub = new Cub(size);
                 cub.SetColors(new List<Color>() { RandomGenerator.GetRandomColor(), RandomGenerator.GetRandomColor() });
                 fallingSpeed = 1f;
                 isFalling = true;
+                onGround = false;
             }
             // Cat timp cade scade din coordonata Y, o distanta afectata de gravitatie
             if(isFalling && !onGround)
@@ -146,7 +147,7 @@ namespace CIOBAN.Scripturi
                 isFalling = false;
                 onGround = false;
 
-                for(int i = 0; i < transforms.Count; i++)
+                for (int i = 0; i < transforms.Count; i++)
                 {
                     transforms[i] = GenerateRandomTransform();
                 }

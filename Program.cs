@@ -11,6 +11,8 @@ using CIOBAN.Librarie.Randomizer;
 using CIOBAN.Librarie.Basic;
 using CIOBAN.Scripturi;
 using System.Collections.Generic;
+using CIOBAN.Library.Scripts;
+using System.Security.Cryptography;
 /*
 * CIOBAN BENIAMIN
 * 3134A
@@ -44,13 +46,16 @@ namespace CIOBAN
         // Laboratorul 3
         #region L3
         CameraController cameraController = new CameraController();
-        Triangle triangle = new Triangle(); 
+        Triangle triangle = new Triangle();
         #endregion
-        // Laboratorul 4 ---- in progres
-        #region L4 - L5
-        // L4
+
+        // Laboratorul 4 + 5
+        #region L4 + L5
         FallingObject fallingObject = new FallingObject();
+        RotatingTeapot rotatingTeapot = new RotatingTeapot();
+
         #endregion
+
         #endregion
         #region Constructor
         public Program() : base(800, 600,new GraphicsMode(32, 24, 0, 8))
@@ -206,6 +211,7 @@ namespace CIOBAN
             //L4 Apeleaza metodele de start
             triangle.Start();
             fallingObject.Start();
+            rotatingTeapot.Start();
             skyBlock.SetColors(new List<Color>() { RandomGenerator.GetRandomColor(),RandomGenerator.GetRandomColor() });
         }
         protected override void OnResize(EventArgs e)
@@ -226,6 +232,7 @@ namespace CIOBAN
             GetInput();
             triangle.Update();
             fallingObject.Update();
+            rotatingTeapot.Update();
             cameraController.Update();
         }
         protected override void OnRenderFrame(FrameEventArgs e)
@@ -249,6 +256,7 @@ namespace CIOBAN
             }
             fallingObject.Draw();
             triangle.Draw();
+            rotatingTeapot.Draw();
             skyBlock.Draw();
             SwapBuffers();
         }

@@ -1,6 +1,7 @@
 ﻿using CIOBAN.Librarie;
 using CIOBAN.Librarie.Basic;
 using OpenTK;
+using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
 using System;
 using System.Collections.Generic;
@@ -38,11 +39,19 @@ namespace CIOBAN.Scripturi
         private KeyboardState lastFrameKeyboard;
         // mouseRot este folosit pentru a calcula rotatia camerei
         // folosind diferenta de la mouse .X si .Y in baza de timp
+
+        // Parametrii pentru camera fixa cu 2 pozitii.
+        private Vector3 nearCameraPos = new Vector3(12f, 5f, 12f);
+        private Vector3 farCameraPos = new Vector3(30f, 10f, 30f);
+        private Vector3 target = Vector3.Zero;
+
+        private Key changeCameraPositionKey = Key.P;
         private Vector2 mouseRot = new Vector2();
         public override void Start()
         {
             lastFrameKeyboard = Keyboard.GetState();
             mouseRot = new Vector2(Mouse.GetState().X, Mouse.GetState().X);
+            Transform.Position = nearCameraPos;
         }
 
         public override void Update()
@@ -79,11 +88,28 @@ namespace CIOBAN.Scripturi
             // Updateaza rotatiile precedente cu a mouse-ului
             mouseRot = new Vector2(mouse.X,mouse.Y);
 
+            // L5
+            // Modifica pozitia camerei
+            if (lockCamera && lastFrameKeyboard[changeCameraPositionKey] && keyboard.IsKeyUp(changeCameraPositionKey))
+            {
+                if (Transform.Position == nearCameraPos)
+                    Transform.Position = farCameraPos;
+                else
+                    Transform.Position = nearCameraPos;
+            }
             lastFrameKeyboard = keyboard;
         }
         public override void Draw()
         {
-            camera.UpdateCamera();
+            if(lockCamera)
+            {
+                Matrix4 lookat = Matrix4.LookAt(Transform.Position, target, Vector3.UnitY);
+                GL.MatrixMode(MatrixMode.Modelview);
+                GL.LoadMatrix(ref lookat);
+            }
+            else
+                camera.UpdateCamera();
+
         }
         // Returneaza un string cu controalele camerei
         public override string ToString()
@@ -92,7 +118,8 @@ namespace CIOBAN.Scripturi
                 "\n\tMovement - " + cameraForwardKey + cameraLeftKey + cameraBackwardsKey + cameraRightKey +
                 ",\n\tUp - " + cameraUpKey + 
                 ",\n\tDown - " + cameraDownKey +
-                ",\n\tLook un/block - " + lockCameraKey + ".\n";
+                ",\n\tUn/block camera - " + lockCameraKey +
+                ",\n\tChange camera position - "+ changeCameraPositionKey+".\n";
             return s;
         }
     }

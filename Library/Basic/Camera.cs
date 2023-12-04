@@ -17,7 +17,7 @@ namespace CIOBAN.Librarie
         // Vector pentru pozitie 
         public Vector3 position { get; set; }
         // Vector pentru directie ()
-        private Vector3 direction;
+        public Vector3 direction ;
         // Forward indica spre fata camerei
         public Vector3 Forward { get { return new Vector3((float) Math.Sin(direction.X), 0, (float)Math.Cos(direction.X)); } }
         // Right indica spre dreapta fata de rotatia camerei
