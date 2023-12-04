@@ -49,8 +49,12 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Library\Models\pumpkin.obj" />
-    <None Include="Library\Models\teapot.obj" />
+    <Resource Include="Library\Models\pumpkin.obj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Library\Models\teapot.obj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <None Include="OpenTK.dll.config" />
     <None Include="packages.config" />
   </ItemGroup>
