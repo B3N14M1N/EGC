@@ -52,7 +52,7 @@ namespace CIOBAN
         // Laboratorul 4 + 5
         #region L4 + L5
         FallingObject fallingObject = new FallingObject();
-        RotatingTeapot rotatingTeapot = new RotatingTeapot();
+        RotatingObjects rotatingTeapot = new RotatingObjects();
 
         #endregion
 

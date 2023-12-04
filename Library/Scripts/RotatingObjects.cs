@@ -12,9 +12,10 @@ using System.IO;
  */
 namespace CIOBAN.Library.Scripts
 {
-    public class RotatingTeapot : GameObject
+    public class RotatingObjects : GameObject
     {
         Teapot teapot;
+        Pumpkin pumpkin;
         private readonly float rotatingSpeed = 25f;
         public List<Vector3> transforms = new List<Vector3>();
         private float angle = 0;
@@ -26,11 +27,15 @@ namespace CIOBAN.Library.Scripts
                 GL.PushMatrix();
                 GL.Translate(transforms[i]);
                 GL.Rotate(angle, Transform.Rotation);
-                if(i%2 == 0)
-                    teapot.meshData.wireframe = true;
+                if (i % 2 == 0)
+                {
+                    GL.Translate(new Vector3(0,7f,0));
+                    GL.Rotate(-90, 1, 0, 0);
+                    GL.Scale(new Vector3(.05f,.05f,.05f));
+                    pumpkin.Draw();
+                }
                 else
-                    teapot.meshData.wireframe=false;
-                teapot.Draw();
+                    teapot.Draw();
                 GL.PopMatrix();
             }
         }
@@ -38,12 +43,12 @@ namespace CIOBAN.Library.Scripts
         public override void Start()
         {
             teapot = new Teapot();
+            pumpkin = new Pumpkin();
             for(int i = -20; i <= 20; i += 10)
             {
                 transforms.Add(new Vector3(i,0f,-20f));
             }
             Transform.Rotation = new Vector3(0f, 1f, 0f);
-            //Transform.Scale = new Vector3(0.5f, 0.5f, 0.5f);
         }
 
         public override void Update()

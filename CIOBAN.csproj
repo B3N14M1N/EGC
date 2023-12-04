@@ -49,6 +49,7 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Library\Models\pumpkin.obj" />
     <None Include="Library\Models\teapot.obj" />
     <None Include="OpenTK.dll.config" />
     <None Include="packages.config" />
@@ -73,11 +74,12 @@
     <Compile Include="Library\Basic\Camera.cs" />
     <Compile Include="Library\Models\Cub.cs" />
     <Compile Include="Library\Models\MeshData.cs" />
+    <Compile Include="Library\Models\Pumpkin.cs" />
     <Compile Include="Library\Models\Teapot.cs" />
     <Compile Include="Library\Randomizer\RandomGenerator.cs" />
     <Compile Include="Library\Basic\IRenderer.cs" />
     <Compile Include="Library\Models\Triunghi.cs" />
-    <Compile Include="Library\Scripts\RotatingTeapot.cs" />
+    <Compile Include="Library\Scripts\RotatingObjects.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Library\Scripts\CameraController.cs" />
     <Compile Include="Library\Scripts\FallingObject.cs" />
