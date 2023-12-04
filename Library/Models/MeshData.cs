@@ -14,13 +14,16 @@ namespace CIOBAN.Library.Models
     // un obiect 3D si randeaza modelul.
     public class MeshData:IRenderer
     {
+        #region Parametri
         public List<Vector3> vertex;
         public List<Vector3> face;
         private List<Color> color;
 
         public bool isVisible = true;
         public bool wireframe = false;
+        #endregion
 
+        #region Constructori
         public MeshData() { 
             vertex = new List<Vector3>();
             face = new List<Vector3>();
@@ -33,7 +36,9 @@ namespace CIOBAN.Library.Models
             face = Faces;
             SetColors(new List<Color>());
         }
+        #endregion
 
+        #region Metode
         public void Draw()
         {
             if(isVisible)
@@ -61,5 +66,6 @@ namespace CIOBAN.Library.Models
                 }
             }
         }
+        #endregion
     }
 }

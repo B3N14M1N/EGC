@@ -14,12 +14,15 @@ namespace CIOBAN.Library.Scripts
 {
     public class RotatingObjects : GameObject
     {
+        #region Parametrii
         FileModel teapot;
         FileModel pumpkin;
         private readonly float rotatingSpeed = 25f;
         public List<Vector3> transforms = new List<Vector3>();
         private float angle = 0;
+        #endregion
 
+        #region Metode
         public override void Draw()
         {
             for(int i = 0; i<transforms.Count; i++)
@@ -55,5 +58,6 @@ namespace CIOBAN.Library.Scripts
         {
             angle += rotatingSpeed * (float)Time.deltaTime;
         }
+        #endregion
     }
 }
