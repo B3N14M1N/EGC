@@ -17,6 +17,8 @@ namespace CIOBAN.Librarie
 {
     // L5
     // Citeste un model 3d dintr-un fisier OBJ
+    // si creaza un obiect care contine datele
+    // citite.
     public class FileModel : IRenderer
     {
         #region Parametri
@@ -40,7 +42,7 @@ namespace CIOBAN.Librarie
 
         public void SetColors(List<Color> colors)
         {
-            meshData.SetColors(colors);
+            meshData?.SetColors(colors);
         }
         #endregion
     }

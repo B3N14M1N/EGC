@@ -10,7 +10,8 @@ using System.Drawing;
 namespace CIOBAN.Library.Models
 {
     // L5
-    // O clasa care continde informatiile despre un obiect 3D
+    // O clasa care continde informatiile despre
+    // un obiect 3D si randeaza modelul.
     public class MeshData:IRenderer
     {
         public List<Vector3> vertex;
@@ -40,7 +41,7 @@ namespace CIOBAN.Library.Models
                 for (int i = 0; i < face.Count; i++)
                 {
                     GL.Begin(wireframe ? PrimitiveType.LineLoop : PrimitiveType.Triangles);
-                    GL.Color3(wireframe? Color.Black : color[i]);
+                    GL.Color3(wireframe ? Color.Black : color[i]);
                     GL.Vertex3(vertex[(int)face[i].X - 1]);
                     GL.Vertex3(vertex[(int)face[i].Y - 1]);
                     GL.Vertex3(vertex[(int)face[i].Z - 1]);
