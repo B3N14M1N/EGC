@@ -73,9 +73,8 @@
     <Compile Include="Library\Basic\Transform.cs" />
     <Compile Include="Library\Basic\Camera.cs" />
     <Compile Include="Library\Models\Cub.cs" />
+    <Compile Include="Library\Models\FileModel.cs" />
     <Compile Include="Library\Models\MeshData.cs" />
-    <Compile Include="Library\Models\Pumpkin.cs" />
-    <Compile Include="Library\Models\Teapot.cs" />
     <Compile Include="Library\Randomizer\RandomGenerator.cs" />
     <Compile Include="Library\Basic\IRenderer.cs" />
     <Compile Include="Library\Models\Triunghi.cs" />

@@ -15,17 +15,16 @@ using System.Threading.Tasks;
  */
 namespace CIOBAN.Librarie
 {
-    // L4 
-    // Un model 3d pentru teapot
-    public class Pumpkin : IRenderer
+    // L5
+    // Citeste un model 3d dintr-un fisier OBJ
+    public class FileModel : IRenderer
     {
         #region Parametri
         public MeshData meshData;
-        private readonly string fileName = "pumpkin.obj";
 
         #endregion
         #region Constructori
-        public Pumpkin()
+        public FileModel(string fileName)
         {
             string solutionPath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
             string completePath = solutionPath + "\\Library\\Models\\" + fileName;

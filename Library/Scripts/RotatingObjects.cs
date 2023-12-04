@@ -14,8 +14,8 @@ namespace CIOBAN.Library.Scripts
 {
     public class RotatingObjects : GameObject
     {
-        Teapot teapot;
-        Pumpkin pumpkin;
+        FileModel teapot;
+        FileModel pumpkin;
         private readonly float rotatingSpeed = 25f;
         public List<Vector3> transforms = new List<Vector3>();
         private float angle = 0;
@@ -42,8 +42,8 @@ namespace CIOBAN.Library.Scripts
 
         public override void Start()
         {
-            teapot = new Teapot();
-            pumpkin = new Pumpkin();
+            teapot = new FileModel("teapot.obj");
+            pumpkin = new FileModel("pumpkin.obj");
             for(int i = -20; i <= 20; i += 10)
             {
                 transforms.Add(new Vector3(i,0f,-20f));
