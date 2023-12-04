@@ -9,6 +9,8 @@ using System.Drawing;
  */
 namespace CIOBAN.Library.Models
 {
+    // L5
+    // O clasa care continde informatiile despre un obiect 3D
     public class MeshData:IRenderer
     {
         public List<Vector3> vertex;
@@ -17,27 +19,22 @@ namespace CIOBAN.Library.Models
 
         public bool isVisible = true;
         public bool wireframe = false;
+
         public MeshData() { 
             vertex = new List<Vector3>();
             face = new List<Vector3>();
-            color = new List<Color>();
+            SetColors(new List<Color>());
         }
 
         public MeshData(List<Vector3> Vertex, List<Vector3> Faces)
         {
             vertex = Vertex;
             face = Faces;
-            color = new List<Color>();
+            SetColors(new List<Color>());
         }
+
         public void Draw()
         {
-            if (color.Count < face.Count)
-            {
-                for (int i = color.Count; i < face.Count; i++)
-                {
-                    color.Add(Color.Pink);
-                }
-            }
             if(isVisible)
             {
                 for (int i = 0; i < face.Count; i++)
@@ -54,7 +51,14 @@ namespace CIOBAN.Library.Models
 
         public void SetColors(List<Color> colors)
         {
-            this.color = colors;
+            color = colors;
+            if (color.Count < face.Count)
+            {
+                for (int i = color.Count; i < face.Count; i++)
+                {
+                    color.Add(Color.Pink);
+                }
+            }
         }
     }
 }
