@@ -35,10 +35,18 @@ namespace CIOBAN.Library.Scripts
                     GL.Translate(new Vector3(0,7f,0));
                     GL.Rotate(-90, 1, 0, 0);
                     GL.Scale(new Vector3(.05f,.05f,.05f));
+                    if (i+1 > transforms.Count / 2)
+                        pumpkin.meshData.wireframe = true;
+                    else pumpkin.meshData.wireframe = false;
                     pumpkin.Draw();
                 }
                 else
+                {
+                    if (i >= transforms.Count / 2)
+                        teapot.meshData.wireframe = true;
+                    else teapot.meshData.wireframe= false;
                     teapot.Draw();
+                }
                 GL.PopMatrix();
             }
         }
@@ -47,7 +55,7 @@ namespace CIOBAN.Library.Scripts
         {
             teapot = new FileModel("teapot.obj");
             pumpkin = new FileModel("pumpkin.obj");
-            for(int i = -20; i <= 20; i += 10)
+            for(int i = -20; i <= 20; i += 11)
             {
                 transforms.Add(new Vector3(i,0f,-20f));
             }
