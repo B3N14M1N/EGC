@@ -14,6 +14,9 @@ namespace CIOBAN.Library.Scripts
 {
     public class RotatingObjects : GameObject
     {
+        // L5
+        // Citeste din fisiere OBJ si randeaza obiectele 
+        // in modul solid si contur
         #region Parametrii
         FileModel teapot;
         FileModel pumpkin;
@@ -35,7 +38,7 @@ namespace CIOBAN.Library.Scripts
                     GL.Translate(new Vector3(0,7f,0));
                     GL.Rotate(-90, 1, 0, 0);
                     GL.Scale(new Vector3(.05f,.05f,.05f));
-                    if (i+1 > transforms.Count / 2)
+                    if (i >= transforms.Count / 2)
                         pumpkin.meshData.wireframe = true;
                     else pumpkin.meshData.wireframe = false;
                     pumpkin.Draw();
