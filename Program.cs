@@ -52,7 +52,7 @@ namespace CIOBAN
         // Laboratorul 4 + 5
         #region L4 + L5
         FallingObject fallingObject = new FallingObject();
-        RotatingObjects rotatingTeapot = new RotatingObjects();
+        RotatingObjects rotatingObjects = new RotatingObjects();
 
         #endregion
 
@@ -211,7 +211,7 @@ namespace CIOBAN
             //L4 Apeleaza metodele de start
             triangle.Start();
             fallingObject.Start();
-            rotatingTeapot.Start();
+            rotatingObjects.Start();
             skyBlock.SetColors(new List<Color>() { RandomGenerator.GetRandomColor(),RandomGenerator.GetRandomColor() });
         }
         protected override void OnResize(EventArgs e)
@@ -232,7 +232,7 @@ namespace CIOBAN
             GetInput();
             triangle.Update();
             fallingObject.Update();
-            rotatingTeapot.Update();
+            rotatingObjects.Update();
             cameraController.Update();
         }
         protected override void OnRenderFrame(FrameEventArgs e)
@@ -256,7 +256,7 @@ namespace CIOBAN
             }
             fallingObject.Draw();
             triangle.Draw();
-            rotatingTeapot.Draw();
+            rotatingObjects.Draw();
             skyBlock.Draw();
             SwapBuffers();
         }
