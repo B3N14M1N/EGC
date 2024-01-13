@@ -70,6 +70,9 @@
     <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\L9\LAB_8_9_10\OpenTK_winforms_z03\Form1.cs">
+      <Link>Form1.cs</Link>
+    </Compile>
     <Compile Include="Library\Basic\Administrare_Date.cs" />
     <Compile Include="Library\Basic\IBehaviour.cs" />
     <Compile Include="Library\Basic\GameObject.cs" />
